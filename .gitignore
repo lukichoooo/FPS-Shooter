@@ -1,0 +1,39 @@
+
+# Build directories
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/*.cmake
+/*.cbp
+/*.user
+/*.sln
+/*.vcxproj*
+/Makefile
+
+# Compiled binaries
+*.exe
+*.out
+*.app
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.dylib
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Assets cache / temp
+/assets/shaders/*.spv    # compiled shader binaries if generated
+/assets/textures/*.tmp
+
+# Logs
+*.log
