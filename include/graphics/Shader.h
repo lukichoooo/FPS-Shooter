@@ -2,14 +2,15 @@
 
 #include "config/EngineConfig.h"
 #include <GL/glew.h>
+#include <string>
 
 class Shader
 {
   private:
     int programId{};
-    const char *vertexShaderSource{};
-    const char *fragmentShaderSource{};
-    void addShader(const char *src, GLenum type) const;
+    std::string vertexShaderSource{};
+    std::string fragmentShaderSource{};
+    void addShader(const std::string &src, GLenum type) const;
 
   public:
     Shader(const ShaderConfig &config);

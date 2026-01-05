@@ -28,7 +28,7 @@ void Renderer::clear() const
 void Renderer::draw(
     const Mesh &mesh,
     const Shader &shader,
-    [[maybe_unused]] const SpaceMatrices &matrices)
+    const SpaceMatrices &matrices)
     const
 {
     shader.use();
@@ -38,6 +38,4 @@ void Renderer::draw(
     // shader.setMat4f("view", glm::value_ptr(matrices.model));
 
     glDrawArrays(GL_TRIANGLES, 0, mesh.getIndexCount());
-
-    glfwSwapBuffers(window.getHandle());
 };

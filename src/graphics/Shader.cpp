@@ -9,7 +9,6 @@
 
 Shader::Shader(const ShaderConfig &config)
 {
-    std::string vertexShaderSourceString, fragmentShaderSourceString;
     try
     {
         std::ifstream vFile(config.vertexShaderPath);
@@ -23,21 +22,31 @@ Shader::Shader(const ShaderConfig &config)
         fStream << fFile.rdbuf();
         vFile.close();
         fFile.close();
-        vertexShaderSourceString = vStream.str();
-        fragmentShaderSourceString = fStream.str();
+        vertexShaderSource = vStream.str();
+        fragmentShaderSource = fStream.str();
     }
     catch (std::ifstream::failure &e)
     {
         spdlog::error("Failed To Read Source Files For Shaders: {}", e.what());
         std::abort();
     }
-    vertexShaderSource = vertexShaderSourceString.c_str();
-    fragmentShaderSource = fragmentShaderSourceString.c_str();
+
+    if (vertexShaderSource.empty() || fragmentShaderSource.empty())
+    {
+        if (vertexShaderSource.empty())
+            spdlog::error("Specified Vertex Shader Empty: {}, path={}",
+                          vertexShaderSource, config.vertexShaderPath);
+        if (fragmentShaderSource.empty())
+            spdlog::error("Specified Fragment Shader Empty: {}, path={}",
+                          fragmentShaderSource, config.fragmentShaderPath);
+        std::abort();
+    }
 
     programId = glCreateProgram();
-    if (!programId || !vertexShaderSource || !fragmentShaderSource)
+    if (!programId)
     {
-        spdlog::error("Failed To Create ShaderClass Object With id={},vsp={},fsp={}",
+        spdlog::error("Failed To Create ShaderClass Object With id={},"
+                      "VertexShader={}, FragmentShader={}",
                       programId, vertexShaderSource, fragmentShaderSource);
         std::abort();
     }
@@ -79,16 +88,17 @@ void Shader::setMat4f(const char *name, const float *matrix) const
 // private helpers
 
 
-void Shader::addShader(const char *src, GLenum type) const
+void Shader::addShader(const std::string &src, GLenum type) const
 {
     int shaderId = glCreateShader(type);
     if (!shaderId)
     {
-        spdlog::error("Failed To Generate Fragment Shader");
+        spdlog::error("Failed To Generate {} Shader", type);
         std::abort();
     }
 
-    glShaderSource(shaderId, 1, &src, NULL);
+    const char *constSrc = src.c_str();
+    glShaderSource(shaderId, 1, &constSrc, NULL);
     glCompileShader(shaderId);
 
     GLint compileStatus = 0;
@@ -97,8 +107,8 @@ void Shader::addShader(const char *src, GLenum type) const
     {
         GLchar logInfo[1024];
         glGetShaderInfoLog(shaderId, sizeof(logInfo), NULL, logInfo);
-        spdlog::error("Fragment Shader Compilation Error: error={}, log={}",
-                      compileStatus, logInfo);
+        spdlog::error("{} Shader Compilation Error: error={}, log={}",
+                      type, compileStatus, logInfo);
     }
 
     glAttachShader(programId, shaderId);
