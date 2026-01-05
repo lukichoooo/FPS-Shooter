@@ -6,6 +6,7 @@ struct ShaderConfig
 {
     const char *vertexShaderPath = "assets/shaders/vertexShader.glsl";
     const char *fragmentShaderPath = "assets/shaders/fragmentShader.glsl";
+    // glm::vec4 color{8.5f, 1.0f, 1.2f, 1.0f};
 };
 
 struct WindowConfig

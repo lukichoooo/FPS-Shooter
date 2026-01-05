@@ -34,8 +34,8 @@ void Renderer::draw(
     shader.use();
     glBindVertexArray(mesh.getVAO());
 
-    shader.setMat4f("model", glm::value_ptr(matrices.view));
-    // shader.setMat4f("view", glm::value_ptr(matrices.model));
+    shader.setMat4f("view", glm::value_ptr(matrices.view));
+    shader.setMat4f("model", glm::value_ptr(matrices.model));
 
-    glDrawArrays(GL_TRIANGLES, 0, mesh.getIndexCount());
+    glDrawElements(GL_TRIANGLES, mesh.getIndexCount(), GL_UNSIGNED_INT, 0);
 };

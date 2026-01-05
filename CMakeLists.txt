@@ -52,12 +52,12 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     -O0
 )
 
-# Remove old shaders from build directory
-file(REMOVE_RECURSE ${CMAKE_BINARY_DIR}/assets/shaders)
-
-# Copy shaders into build directory for runtime access
-file(COPY
-    ${CMAKE_CURRENT_SOURCE_DIR}/assets/shaders
-    DESTINATION ${CMAKE_BINARY_DIR}/assets
+add_custom_target(copy_shaders ALL
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+        ${CMAKE_BINARY_DIR}/assets/shaders
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/assets/shaders
+        ${CMAKE_BINARY_DIR}/assets/shaders
+    COMMENT "Updating shaders"
 )
 

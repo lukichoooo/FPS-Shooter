@@ -1,9 +1,8 @@
 #pragma once
 
-#include "graphics/Shader.h"
+#include "graphics/Renderer.h"
 #include "config/EngineConfig.h"
 #include "core/Window.h"
-#include "graphics/Renderer.h"
 
 class Engine
 {
@@ -17,5 +16,4 @@ class Engine
     EngineConfig config;
     Window window;
     Renderer renderer;
-    Shader shader;
 };

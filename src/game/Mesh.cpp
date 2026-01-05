@@ -1,7 +1,7 @@
 #include "game/Mesh.h"
 #include <GL/glext.h>
 
-Mesh::Mesh() : VAO(0), VBO(0), EBO(0) {}
+Mesh::Mesh() : VAO(0), VBO(0), EBO(0), indexCount(0) {}
 Mesh::~Mesh() { clear(); }
 
 void Mesh::clear()
@@ -41,8 +41,8 @@ void Mesh::createMesh(std::span<Vertex> vertices, std::span<GLuint> indices)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size_bytes(), indices.data(), GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
     glEnableVertexAttribArray(0);
 
-    glBindVertexArray(0); // unbind
+    glBindVertexArray(0);
 }
