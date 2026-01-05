@@ -11,7 +11,7 @@ class Window
     void makeContextCurrent();
     void getFramebufferSize(int &width, int &height) const;
 
-    inline GLFWwindow *getHandle() const { return window; }
+    GLFWwindow *getHandle() const { return window; }
 
   private:
     GLFWwindow *window{nullptr};

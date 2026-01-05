@@ -1,11 +1,10 @@
-
-// Renderer.cpp
 #include "config/EngineConfig.h"
 #include "core/Window.h"
 #include "graphics/Renderer.h"
 
 Renderer::Renderer(const RenderConfig &config, Window &window)
-    : renderConfig(config), window(window) {}
+    : renderConfig(config),
+      window(window) {}
 
 void Renderer::clear()
 {

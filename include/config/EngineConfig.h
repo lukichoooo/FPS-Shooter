@@ -26,4 +26,5 @@ struct EngineConfig
 {
     WindowConfig window;
     RenderConfig render;
+    ShaderConfig shader;
 };
