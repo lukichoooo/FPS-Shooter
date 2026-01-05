@@ -10,25 +10,29 @@
 Shader::Shader(const ShaderConfig &config)
 {
     std::string vertexShaderSourceString, fragmentShaderSourceString;
-    std::ifstream file;
-    file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-
     try
     {
+        std::ifstream vFile(config.vertexShaderPath);
+        std::ifstream fFile(config.fragmentShaderPath);
+
+        vFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        fFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
         std::stringstream vStream, fStream;
-        file.open(config.vertexShaderPath);
-        vStream << file.rdbuf();
-        file.open(config.fragmentShaderPath);
-        fStream << file.rdbuf();
-        file.close();
+        vStream << vFile.rdbuf();
+        fStream << fFile.rdbuf();
+        vFile.close();
+        fFile.close();
         vertexShaderSourceString = vStream.str();
         fragmentShaderSourceString = fStream.str();
     }
-    catch (std::ifstream::failure e)
+    catch (std::ifstream::failure &e)
     {
         spdlog::error("Failed To Read Source Files For Shaders: {}", e.what());
         std::abort();
     }
+    vertexShaderSource = vertexShaderSourceString.c_str();
+    fragmentShaderSource = fragmentShaderSourceString.c_str();
 
     programId = glCreateProgram();
     if (!programId || !vertexShaderSource || !fragmentShaderSource)
