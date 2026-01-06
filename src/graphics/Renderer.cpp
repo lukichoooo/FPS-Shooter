@@ -22,7 +22,10 @@ void Renderer::beginFrame() const
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Renderer::submit(Entity &entity)
+void Renderer::submit(Scene &scene)
 {
-    entity.draw();
+    for (auto &entity : scene.getEntities())
+    {
+        entity->draw();
+    }
 };

@@ -5,11 +5,12 @@
 
 class Scene
 {
-  public:
-    Scene();
-
-    void addEntity(Entity *entity);
-
   private:
+    int lastFreeIndex{0};
     std::span<Entity *> entities;
+
+  public:
+    Scene(std::span<Entity *> entities);
+
+    const std::span<Entity *> &getEntities() { return entities; }
 };

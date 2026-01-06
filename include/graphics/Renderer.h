@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "game/Entity.h"
+#include "game/Scene.h"
 #include <glm/mat4x4.hpp>
 
 class Renderer
@@ -16,5 +16,5 @@ class Renderer
     void beginFrame() const;
 
     // @brief changes binded Vertex Array and Shader
-    void submit(Entity &entity);
+    void submit(Scene &scene);
 };

@@ -2,6 +2,7 @@
 #include "game/Mesh.h"
 #include "game/Engine.h"
 #include "config/EngineConfig.h"
+#include "game/Scene.h"
 #include "graphics/Renderer.h"
 #include "core/Camera.h"
 #include "core/Dtos.h"
@@ -52,11 +53,19 @@ void Engine::run()
     shader.use();
     input.use();
 
-    Entity entity({{0, 0, 0}}, &square, &shader);
+
+    // Create some entities
+    Entity entity1({glm::vec3(0.0f, 0.0f, 0.0f)}, &square, &shader);
+    Entity entity2({glm::vec3(2.0f, 0.0f, 0.0f)}, &square, &shader);
+    Entity entity3({glm::vec3(-2.0f, 0.0f, 0.0f)}, &square, &shader);
+
+    // Create an array of pointers
+    Entity *entitiesArray[] = {&entity1, &entity2, &entity3};
+
+    Scene scene(entitiesArray);
 
     while (!glfwWindowShouldClose(window.getHandle()))
     {
-        renderer.beginFrame();
         FrameClock::updateDeltaTime();
 
         input.handleKeyInput(player, camera);
@@ -68,7 +77,8 @@ void Engine::run()
         shader.setMat4f("view", matrices.view);
         shader.setMat4f("projection", matrices.projection);
 
-        renderer.submit(entity);
+        renderer.beginFrame();
+        renderer.submit(scene);
 
         glfwSwapBuffers(window.getHandle());
         glfwPollEvents();
