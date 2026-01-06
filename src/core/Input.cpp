@@ -20,7 +20,7 @@ void Input::use()
 }
 
 
-void Input::handleKeyboardInput(Player &player, Camera &camera)
+void Input::handleKeyInput(Player &player, Camera &camera)
 {
     glm::vec3 moveDir{0.0f};
     glm::vec3 right = glm::normalize(
@@ -49,7 +49,7 @@ void Input::handleKeyboardInput(Player &player, Camera &camera)
         glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
-void Input::handleMouseInput(Camera &camera)
+void Input::handleMouseSensorInput(Camera &camera)
 {
     mouseChange.X *= config.sensitivity;
     mouseChange.Y *= config.sensitivity;
@@ -71,13 +71,13 @@ void Input::mouseCallbackStatic(GLFWwindow *window, double x, double y)
 {
     Input *input = static_cast<Input *>(glfwGetWindowUserPointer(window));
     if (input)
-        input->processMouseInput(x, y);
+        input->processMouseSensorInput(x, y);
 }
 
-void Input::processMouseInput(double x, double y)
+void Input::processMouseSensorInput(double x, double y)
 {
-    mouseChange.X = float(x - lastMouse.X);
-    mouseChange.Y = float(lastMouse.Y - y);
+    mouseChange.X = x - lastMouse.X;
+    mouseChange.Y = lastMouse.Y - y;
 
     lastMouse.X = x;
     lastMouse.Y = y;

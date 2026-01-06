@@ -39,7 +39,7 @@ void Engine::run()
     };
 
     GLuint indices[] = {0, 1, 3,
-                        1, 2, 3};
+        1, 2, 3};
 
     Mesh squares[1];
     squares[0].createMesh(vertices, indices);
@@ -61,8 +61,8 @@ void Engine::run()
     {
         updateDeltaTime();
 
-        input.handleKeyboardInput(player, camera);
-        input.handleMouseInput(camera);
+        input.handleKeyInput(player, camera);
+        input.handleMouseSensorInput(camera);
 
         camera.updateView(player, matrices);
         camera.updateProjection(matrices);

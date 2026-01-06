@@ -13,7 +13,8 @@ struct PlayerConfig
 
 struct InputConfig
 {
-    float sensitivity{0.5f};
+    // @brief can cause weird spinning arund
+    float sensitivity{0.58f};
     float runSpeedMultiplier{3.0f};
     bool invertY{true};
 };
@@ -45,7 +46,7 @@ struct WindowConfig
 
 struct RenderConfig
 {
-    glm::vec4 clearColor{1.0f, 1.0f, 1.2f, 1.0f};
+    glm::vec4 clearColor{0.5f, 1.0f, 1.2f, 1.0f};
     bool enableDepthTest{true};
 };
 

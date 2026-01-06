@@ -21,16 +21,16 @@ class Input
 
 
     static void mouseCallbackStatic(GLFWwindow *window, double x, double y);
-    void processMouseInput(double x, double y);
+    void processMouseSensorInput(double x, double y);
 
   public:
     Input(const InputConfig &config, GLFWwindow *window, const FrameClock &frameClock);
 
     // @brief changes player position
-    void handleKeyboardInput(Player &player, Camera &camera);
+    void handleKeyInput(Player &player, Camera &camera);
 
     // @brief changes camera orientation
-    void handleMouseInput(Camera &camera);
+    void handleMouseSensorInput(Camera &camera);
 
     void use();
 };
