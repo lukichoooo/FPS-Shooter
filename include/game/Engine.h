@@ -6,14 +6,14 @@
 
 class Engine
 {
+  private:
+    EngineConfig config;
+    Window window;
+    Renderer renderer;
+
   public:
     Engine(const EngineConfig &config);
 
     // @brief Main Loop
     void run();
-
-  private:
-    EngineConfig config;
-    Window window;
-    Renderer renderer;
 };

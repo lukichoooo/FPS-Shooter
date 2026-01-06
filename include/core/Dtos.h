@@ -19,9 +19,3 @@ struct MousePos
     double X;
     double Y;
 };
-
-struct FrameClock
-{
-    float lastFrame;
-    float deltaTime;
-};

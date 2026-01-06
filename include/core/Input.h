@@ -3,7 +3,7 @@
 #include "config/EngineConfig.h"
 #include "core/Camera.h"
 #include "core/Dtos.h"
-#include "game/Entities/Player.h"
+#include "game/Player.h"
 #include <GLFW/glfw3.h>
 
 class Input
@@ -17,14 +17,12 @@ class Input
 
     bool keyPressed[GLFW_KEY_LAST + 1]{};
 
-    const FrameClock &frameClock;
-
 
     static void mouseCallbackStatic(GLFWwindow *window, double x, double y);
     void processMouseSensorInput(double x, double y);
 
   public:
-    Input(const InputConfig &config, GLFWwindow *window, const FrameClock &frameClock);
+    Input(const InputConfig &config, GLFWwindow *window);
 
     // @brief changes player position
     void handleKeyInput(Player &player, Camera &camera);

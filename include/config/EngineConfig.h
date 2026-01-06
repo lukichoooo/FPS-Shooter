@@ -1,22 +1,36 @@
 #pragma once
+
 #include <glm/ext/vector_float3.hpp>
 #include <glm/vec4.hpp>
 
-class CharacterConfig
+class EntityConfig
 {
   public:
     glm::vec3 initialPos{0.0f, 0.0f, 0.0f};
+};
+
+class CharacterConfig : public EntityConfig
+{
+  public:
     float height{2.0f};
     float jumpStrength{1.0f};
     float walkSpeed{5.0f};
 
     float runSpeedMultiplier{3.0f};
-    float speedFovMultiplier{1.4f};
 };
 
-class PlayerConfig : public CharacterConfig
+struct PlayerConfig
 {
-  public:
+    float speedFovMultiplier{1.4f};
+    CharacterConfig characterConfig;
+};
+
+
+// stuff
+
+struct SceneConfig
+{
+    const float gravity = 9.8066f;
 };
 
 struct InputConfig
@@ -56,6 +70,7 @@ struct RenderConfig
     glm::vec4 clearColor{0.5f, 1.0f, 1.2f, 1.0f};
     bool enableDepthTest{true};
 };
+
 
 struct EngineConfig
 {

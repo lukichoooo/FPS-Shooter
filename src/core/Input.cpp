@@ -1,15 +1,13 @@
 #include "core/Input.h"
 #include "config/EngineConfig.h"
 #include "core/Dtos.h"
+#include "graphics/FrameClock.h"
 #include <GLFW/glfw3.h>
 
 Input::Input(
-    const InputConfig &config,
-    GLFWwindow *window,
-    const FrameClock &frameClock)
+    const InputConfig &config, GLFWwindow *window)
     : config(config),
-      window(window),
-      frameClock(frameClock) {}
+      window(window) {}
 
 
 void Input::use()
@@ -39,9 +37,9 @@ void Input::handleKeyInput(Player &player, Camera &camera)
         moveDir = glm::normalize(moveDir);
 
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-        player.run(moveDir * frameClock.deltaTime);
+        player.run(moveDir * FrameClock::getDeltaTime());
     else
-        player.walk(moveDir * frameClock.deltaTime);
+        player.walk(moveDir * FrameClock::getDeltaTime());
 
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GLFW_TRUE);

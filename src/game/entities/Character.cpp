@@ -1,10 +1,10 @@
-#include "config/EngineConfig.h"
-#include <game/Entities/Character.h>
+#include <game/entities/Character.h>
 
 Character::Character(const CharacterConfig &config)
-    : config(config),
-      pos(config.initialPos),
+    : Entity(config),
+      config(config),
       height(config.height) {}
+
 
 void Character::run(const glm::vec3 &movement)
 {
@@ -16,6 +16,6 @@ void Character::walk(const glm::vec3 &movement)
     Character::move(movement);
 }
 
-void Character::jump()
+void Character::jump() // TODO
 {
 }

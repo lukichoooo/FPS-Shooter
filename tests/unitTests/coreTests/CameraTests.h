@@ -31,16 +31,14 @@ inline void CameraTests::updateViewTest()
     auto front = glm::normalize(direction);
 
 
-    PlayerConfig playerConfig;
-    playerConfig.initialPos = {0, 0, 0};
-    Player player(playerConfig);
+    glm::vec3 pos = {0, 0, 0};
 
     auto expected = glm::lookAt(
-        player.getPos(), player.getPos() + front, sut.up);
+        pos, pos + front, sut.up);
 
     SpaceMatrices matrices;
 
-    sut.updateView(player, matrices);
+    sut.updateView(pos, matrices);
 
     assert(sut.front == front);
     assert(matrices.view == expected);

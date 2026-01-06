@@ -1,28 +1,25 @@
 #pragma once
 
-#include "game/Mesh.h"
 #include "config/EngineConfig.h"
-#include "core/Window.h"
+#include "game/Mesh.h"
 #include "graphics/Shader.h"
 #include "core/Dtos.h"
 #include <glm/mat4x4.hpp>
 
 class Renderer
 {
-  public:
-    Renderer(const RenderConfig &config, Window &window);
+  private:
+    RenderConfig config;
 
-    // @brief set clear colour & clear
+  public:
+    Renderer(const RenderConfig &config);
+
+    // @brief set clear color & clear
     void clear() const;
 
     // @brief changes binded Vertex Array and Shader
     void draw(
-        const std::span<Mesh> meshes,
+        const Mesh &mesh,
         const Shader &shader,
-        SpaceMatrices &matrices)
-        const;
-
-  private:
-    RenderConfig config;
-    Window &window;
+        SpaceMatrices &matrices);
 };

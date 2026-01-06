@@ -20,11 +20,14 @@ add_library(GameCore STATIC
 
     # Game
     src/game/Engine.cpp
-    src/game/Character.cpp
+    src/game/Player.cpp
+    src/game/Entity.cpp
+    src/game/entities/Character.cpp
     src/game/Mesh.cpp
 
     # Graphics
     src/graphics/Renderer.cpp
+    src/graphics/FrameClock.cpp
     src/graphics/Shader.cpp
 )
 

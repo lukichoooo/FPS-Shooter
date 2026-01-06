@@ -1,6 +1,7 @@
 
 # Build directories
 /build/
+/external
 /CMakeFiles/
 /CMakeCache.txt
 /*.cmake
