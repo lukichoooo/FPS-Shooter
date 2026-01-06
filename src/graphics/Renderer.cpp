@@ -24,7 +24,12 @@ void Renderer::beginFrame() const
 
 void Renderer::submit(Scene &scene)
 {
-    for (auto &entity : scene.getEntities())
+    for (auto &entity : scene.getDynamicEntities())
+    {
+        entity->draw();
+    }
+
+    for (auto &entity : scene.getStaticEntities())
     {
         entity->draw();
     }

@@ -7,6 +7,8 @@ class EntityConfig
 {
   public:
     glm::vec3 initialPos{0.0f, 0.0f, 0.0f};
+    glm::vec3 initialRotation{0.0f, 0.0f, 0.0f};
+    glm::vec3 initialScale{1.0f, 1.0f, 1.0f};
 };
 
 class CharacterConfig : public EntityConfig

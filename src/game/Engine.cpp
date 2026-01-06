@@ -1,8 +1,8 @@
-#include "game/Entity.h"
 #include "game/Mesh.h"
 #include "game/Engine.h"
 #include "config/EngineConfig.h"
 #include "game/Scene.h"
+#include "game/StaticEntity.h"
 #include "graphics/Renderer.h"
 #include "core/Camera.h"
 #include "core/Dtos.h"
@@ -55,14 +55,15 @@ void Engine::run()
 
 
     // Create some entities
-    Entity entity1({glm::vec3(0.0f, 0.0f, 0.0f)}, &square, &shader);
-    Entity entity2({glm::vec3(2.0f, 0.0f, 0.0f)}, &square, &shader);
-    Entity entity3({glm::vec3(-2.0f, 0.0f, 0.0f)}, &square, &shader);
+    StaticEntity entity1({}, &square, &shader);
+    StaticEntity entity2({glm::vec3(2.0f, 0.0f, 0.0f)}, &square, &shader);
+    StaticEntity entity3({glm::vec3(-2.0f, 0.0f, 0.0f)}, &square, &shader);
 
     // Create an array of pointers
-    Entity *entitiesArray[] = {&entity1, &entity2, &entity3};
+    StaticEntity *staticEntities[] = {&entity1, &entity2, &entity3};
 
-    Scene scene(entitiesArray);
+    Scene scene;
+    scene.setStaticEntities(staticEntities);
 
     while (!glfwWindowShouldClose(window.getHandle()))
     {

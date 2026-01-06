@@ -22,9 +22,9 @@ add_library(GameCore STATIC
     src/game/Engine.cpp
     src/game/Player.cpp
     src/game/Entity.cpp
+    src/game/StaticEntity.cpp
     src/game/entities/Character.cpp
     src/game/Mesh.cpp
-    src/game/Scene.cpp
 
     # Graphics
     src/graphics/Renderer.cpp
