@@ -7,19 +7,22 @@
 class Player
 {
   private:
-    float height;
-    float jumpStrength;
-    float walkSpeed;
+    PlayerConfig config;
+
     glm::vec3 pos;
+    float height;
 
     float yVelocity{0.0f};
     bool isJumping{false};
     float jumpOffset{0.0f};
+    float FOVMultiplier{1.0f};
+
+
+    void move(const glm::vec3 &movement) { pos += movement; }
 
   public:
     Player(const PlayerConfig &config);
 
-    float getWalkSpeed() const { return walkSpeed; }
     const glm::vec3 &getPos() const { return pos; }
     float getYVelocity() const { return yVelocity; }
     float getIsJumping() const { return isJumping; }
@@ -30,5 +33,9 @@ class Player
     void setIsJumping(bool isJumping) { this->isJumping = isJumping; }
     void setJumpOffset(float jumpOffset) { this->jumpOffset = jumpOffset; }
 
-    void move(const glm::vec3 &delta);
+
+    void jump();
+
+    void run(const glm::vec3 &movement);
+    void walk(const glm::vec3 &movement);
 };

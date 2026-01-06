@@ -15,9 +15,9 @@ class Input
     MousePos lastMouse{0, 0};
     MousePos mouseChange{0, 0};
 
-    const FrameClock &frameClock;
-
     bool keyPressed[GLFW_KEY_LAST + 1]{};
+
+    const FrameClock &frameClock;
 
 
     static void mouseCallbackStatic(GLFWwindow *window, double x, double y);

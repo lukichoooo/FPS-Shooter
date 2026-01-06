@@ -2,20 +2,27 @@
 #include <glm/ext/vector_float3.hpp>
 #include <glm/vec4.hpp>
 
-
-struct PlayerConfig
+class Character
 {
+  public:
+    glm::vec3 initialPos{0.0f, 0.0f, 0.0f};
     float height{2.0f};
     float jumpStrength{1.0f};
     float walkSpeed{5.0f};
-    glm::vec3 initialPos{0.0f, 0.0f, 0.0f};
+
+    float runSpeedMultiplier{3.0f};
+    float speedFovMultiplier{1.4f};
+};
+
+class PlayerConfig : public Character
+{
+  public:
 };
 
 struct InputConfig
 {
     // @brief can cause weird spinning arund
     float sensitivity{0.58f};
-    float runSpeedMultiplier{3.0f};
     bool invertY{true};
 };
 
@@ -23,7 +30,7 @@ struct CameraConfig
 {
     float width{1280.0f};
     float height{720.0f};
-    float FOV{90.0f};
+    float defaultFOV{90.0f};
     float nearPlane{0.1f};
     float farPlane{100.0f};
     glm::vec3 front{0.0f, 0.0f, -1.0f};

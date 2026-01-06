@@ -1,12 +1,20 @@
 #include <game/Player.h>
 
 Player::Player(const PlayerConfig &config)
-    : height(config.height),
-      jumpStrength(config.jumpStrength),
-      walkSpeed(config.walkSpeed),
-      pos(config.initialPos) {}
+    : config(config),
+      pos(config.initialPos),
+      height(config.height) {}
 
-void Player::move(const glm::vec3 &delta)
+void Player::run(const glm::vec3 &movement)
 {
-    pos += delta;
+    Player::move(movement * config.runSpeedMultiplier);
+}
+
+void Player::walk(const glm::vec3 &movement)
+{
+    Player::move(movement);
+}
+
+void Player::jump()
+{
 }

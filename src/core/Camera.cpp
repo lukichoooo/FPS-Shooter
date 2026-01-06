@@ -6,7 +6,7 @@
 
 Camera::Camera(const CameraConfig &config)
     : config(config),
-      FOV(config.FOV),
+      FOV(config.defaultFOV),
       front(config.front),
       up(config.up) {}
 

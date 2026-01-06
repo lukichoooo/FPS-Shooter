@@ -38,12 +38,10 @@ void Input::handleKeyInput(Player &player, Camera &camera)
     if (glm::length(moveDir) > 0.0f)
         moveDir = glm::normalize(moveDir);
 
-    float speed = player.getWalkSpeed();
-
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-        speed *= config.runSpeedMultiplier;
-
-    player.move(moveDir * speed * frameClock.deltaTime);
+        player.run(moveDir * frameClock.deltaTime);
+    else
+        player.walk(moveDir * frameClock.deltaTime);
 
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GLFW_TRUE);
