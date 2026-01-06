@@ -14,9 +14,9 @@ Input::Input(
 
 void Input::use()
 {
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetWindowUserPointer(window, this);
-    glfwSetCursorPosCallback(window, this->mouseCallbackStatic);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPosCallback(window, Input::mouseCallbackStatic);
 }
 
 
@@ -54,7 +54,7 @@ void Input::handleMouseInput(Camera &camera)
     mouseChange.X *= config.sensitivity;
     mouseChange.Y *= config.sensitivity;
 
-    camera.setPitch(camera.getPitch() + mouseChange.Y);
+    camera.setPitch(camera.getPitch() + (config.invertY ? mouseChange.Y : -mouseChange.Y));
     camera.setYaw(camera.getYaw() + mouseChange.X);
 
     if (camera.getPitch() > 89.0f)

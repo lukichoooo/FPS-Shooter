@@ -28,6 +28,6 @@ class Camera
     void setYaw(float value) { yaw = value; }
     void setPitch(float value) { pitch = value; }
 
-    void updateView(const Player &player, SpaceMatrices &matrices) const;
+    void updateView(const Player &player, SpaceMatrices &matrices);
     void updateProjection(SpaceMatrices &matrices);
 };

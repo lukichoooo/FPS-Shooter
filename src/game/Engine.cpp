@@ -15,13 +15,13 @@ Engine::Engine(const EngineConfig &cfg)
       renderer(cfg.render, window) {}
 
 
-FrameClock frameCLock;
+FrameClock frameClock;
 
 void updateDeltaTime()
 {
     float currentFrame = glfwGetTime();
-    frameCLock.deltaTime = currentFrame - frameCLock.lastFrame;
-    frameCLock.lastFrame = currentFrame;
+    frameClock.deltaTime = currentFrame - frameClock.lastFrame;
+    frameClock.lastFrame = currentFrame;
 }
 
 void Engine::run()
@@ -48,7 +48,7 @@ void Engine::run()
 
     Camera camera(config.camera);
     Player player(config.player);
-    Input input(config.input, window.getHandle(), frameCLock);
+    Input input(config.input, window.getHandle(), frameClock);
 
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

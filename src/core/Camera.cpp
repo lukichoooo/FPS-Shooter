@@ -8,16 +8,18 @@ Camera::Camera(const CameraConfig &config)
     : config(config),
       FOV(config.FOV),
       front(config.front),
-      up(config.up)
-{
-}
+      up(config.up) {}
 
-void Camera::updateView(const Player &player, SpaceMatrices &matrices) const
+
+void Camera::updateView(const Player &player, SpaceMatrices &matrices)
 {
-    matrices.view = glm::lookAt(
-        player.getPos(),
-        player.getPos() + front,
-        up);
+    glm::vec3 direction;
+    direction.x = glm::cos(glm::radians(pitch)) * glm::cos(glm::radians(yaw));
+    direction.y = glm::sin(glm::radians(pitch));
+    direction.z = glm::cos(glm::radians(pitch)) * glm::sin(glm::radians(yaw));
+    front = glm::normalize(direction);
+
+    matrices.view = glm::lookAt(player.getPos(), player.getPos() + front, up);
 }
 
 
