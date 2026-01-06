@@ -27,7 +27,7 @@ void Camera::updateProjection(SpaceMatrices &matrices)
 {
     matrices.projection = glm::perspective(
         glm::radians(FOV),
-        (float)config.width / (float)config.height,
+        (float)config.width / (float)config.height, // maybe use framebuffer size?
         config.nearPlane,
         config.farPlane);
 }

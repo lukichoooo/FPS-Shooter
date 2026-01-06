@@ -2,10 +2,12 @@
 
 #include "config/EngineConfig.h"
 #include "core/Dtos.h"
-#include "game/Player.h"
+#include "game/Entities/Player.h"
 
 class Camera
 {
+    friend class CameraTests;
+
   private:
     CameraConfig config;
     float FOV = 90.0f;

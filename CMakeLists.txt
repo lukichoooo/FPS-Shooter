@@ -5,11 +5,14 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Libraries
+find_package(OpenGL REQUIRED)
+find_package(glm REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(glfw3 REQUIRED)
 
-# Executable
-add_executable(${PROJECT_NAME} src/main.cpp)
-
-target_sources(${PROJECT_NAME} PRIVATE
+# Create a library for all game code
+add_library(GameCore STATIC
     # Core
     src/core/Window.cpp
     src/core/Camera.cpp
@@ -17,7 +20,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 
     # Game
     src/game/Engine.cpp
-    src/game/Player.cpp
+    src/game/Character.cpp
     src/game/Mesh.cpp
 
     # Graphics
@@ -25,18 +28,39 @@ target_sources(${PROJECT_NAME} PRIVATE
     src/graphics/Shader.cpp
 )
 
-# Libraries
-find_package(OpenGL REQUIRED)
-find_package(glm REQUIRED)
-find_package(GLEW REQUIRED)
-find_package(glfw3 REQUIRED)
+target_include_directories(GameCore PUBLIC
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/external
+)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
+target_link_libraries(GameCore PUBLIC
     OpenGL::GL
     glm::glm
     GLEW::GLEW
     glfw
 )
+
+target_compile_options(GameCore PRIVATE
+    -Wall
+    -Wextra
+    -Wpedantic
+    -Werror
+    -g
+    -O0
+)
+
+# Executable
+add_executable(${PROJECT_NAME} src/main.cpp)
+target_link_libraries(Shooter PRIVATE GameCore)
+
+# Testing Executable
+add_executable(Tests tests/unitTests/Tests.cpp)
+target_link_libraries(Tests PRIVATE GameCore)
+
+target_include_directories(Tests PRIVATE
+    ${PROJECT_SOURCE_DIR}/tests
+)
+
 
 # Include paths
 target_include_directories(${PROJECT_NAME} 
@@ -63,4 +87,5 @@ add_custom_target(copy_shaders ALL
         ${CMAKE_BINARY_DIR}/assets/shaders
     COMMENT "Updating shaders"
 )
+
 

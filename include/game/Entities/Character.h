@@ -1,10 +1,9 @@
-
 #pragma once
 
 #include "config/EngineConfig.h"
 #include <glm/ext/vector_float3.hpp>
 
-class Player
+class Character
 {
   private:
     PlayerConfig config;
@@ -21,7 +20,7 @@ class Player
     void move(const glm::vec3 &movement) { pos += movement; }
 
   public:
-    Player(const PlayerConfig &config);
+    Character(const CharacterConfig &config);
 
     const glm::vec3 &getPos() const { return pos; }
     float getYVelocity() const { return yVelocity; }

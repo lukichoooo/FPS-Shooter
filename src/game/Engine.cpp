@@ -3,7 +3,7 @@
 #include "core/Camera.h"
 #include "core/Dtos.h"
 #include "core/Input.h"
-#include "game/Player.h"
+#include "game/Entities/Player.h"
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -76,4 +76,7 @@ void Engine::run()
         glfwSwapBuffers(window.getHandle());
         glfwPollEvents();
     }
+
+    glfwDestroyWindow(window.getHandle());
+    glfwTerminate();
 }

@@ -2,7 +2,7 @@
 #include <glm/ext/vector_float3.hpp>
 #include <glm/vec4.hpp>
 
-class Character
+class CharacterConfig
 {
   public:
     glm::vec3 initialPos{0.0f, 0.0f, 0.0f};
@@ -14,7 +14,7 @@ class Character
     float speedFovMultiplier{1.4f};
 };
 
-class PlayerConfig : public Character
+class PlayerConfig : public CharacterConfig
 {
   public:
 };
