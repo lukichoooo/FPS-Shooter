@@ -15,8 +15,7 @@ class Player
     float FOVMultiplier{1.0f};
 
   public:
-    Player(
-        const PlayerConfig &config);
+    Player(const PlayerConfig &config);
 
     const Character &getCharacter() const { return character; }
 

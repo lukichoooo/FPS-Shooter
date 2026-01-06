@@ -1,9 +1,11 @@
 #include <game/entities/Character.h>
 
 Character::Character(const CharacterConfig &config)
-    : Entity(config),
+    : Entity(config, nullptr, nullptr), // TODO: add body to character
       config(config),
-      height(config.height) {}
+      height(config.height)
+{
+}
 
 
 void Character::run(const glm::vec3 &movement)

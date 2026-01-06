@@ -1,5 +1,6 @@
 #include "graphics/Renderer.h"
 #include "config/EngineConfig.h"
+#include "game/Entity.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -10,7 +11,7 @@ Renderer::Renderer(const RenderConfig &config)
     glEnable(GL_DEPTH_TEST);
 }
 
-void Renderer::clear() const
+void Renderer::beginFrame() const
 {
     glClearColor(
         config.clearColor.r,
@@ -21,18 +22,7 @@ void Renderer::clear() const
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Renderer::draw(
-    const Mesh &mesh,
-    const Shader &shader,
-    SpaceMatrices &matrices)
+void Renderer::submit(Entity &entity)
 {
-    glBindVertexArray(mesh.getVAO());
-
-    // TODO: move those out
-    matrices.model = glm::mat4(1.0f);
-    matrices.model = glm::scale(matrices.model, glm::vec3(0.5f));
-
-    shader.setMat4f("model", matrices.model);
-
-    glDrawElements(GL_TRIANGLES, mesh.getIndexCount(), GL_UNSIGNED_INT, 0);
+    entity.draw();
 };

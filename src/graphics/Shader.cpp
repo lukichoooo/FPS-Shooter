@@ -37,10 +37,10 @@ Shader::Shader(const ShaderConfig &config)
     {
         if (vertexShaderSource.empty())
             spdlog::error("Specified Vertex Shader Empty: {}, path={}",
-                          vertexShaderSource, config.vertexShaderPath);
+                vertexShaderSource, config.vertexShaderPath);
         if (fragmentShaderSource.empty())
             spdlog::error("Specified Fragment Shader Empty: {}, path={}",
-                          fragmentShaderSource, config.fragmentShaderPath);
+                fragmentShaderSource, config.fragmentShaderPath);
         std::abort();
     }
 
@@ -49,7 +49,7 @@ Shader::Shader(const ShaderConfig &config)
     {
         spdlog::error("Failed To Create ShaderClass Object With id={},"
                       "VertexShader={}, FragmentShader={}",
-                      programId, vertexShaderSource, fragmentShaderSource);
+            programId, vertexShaderSource, fragmentShaderSource);
         std::abort();
     }
 }
@@ -68,7 +68,7 @@ void Shader::linkProgram() const
         GLchar logInfo[1024];
         glGetProgramInfoLog(programId, sizeof(logInfo), NULL, logInfo);
         spdlog::error("Shader Program Link Error: error={}, log={}",
-                      linkStatus, logInfo);
+            linkStatus, logInfo);
     }
 }
 
@@ -110,7 +110,7 @@ void Shader::addShader(const std::string &src, GLenum type) const
         GLchar logInfo[1024];
         glGetShaderInfoLog(shaderId, sizeof(logInfo), NULL, logInfo);
         spdlog::error("{} Shader Compilation Error: error={}, log={}",
-                      type, compileStatus, logInfo);
+            type, compileStatus, logInfo);
     }
 
     glAttachShader(programId, shaderId);

@@ -1,3 +1,4 @@
+#include "game/Entity.h"
 #include "game/Mesh.h"
 #include "game/Engine.h"
 #include "config/EngineConfig.h"
@@ -51,10 +52,11 @@ void Engine::run()
     shader.use();
     input.use();
 
+    Entity entity({{0, 0, 0}}, &square, &shader);
 
     while (!glfwWindowShouldClose(window.getHandle()))
     {
-        renderer.clear();
+        renderer.beginFrame();
         FrameClock::updateDeltaTime();
 
         input.handleKeyInput(player, camera);
@@ -66,7 +68,7 @@ void Engine::run()
         shader.setMat4f("view", matrices.view);
         shader.setMat4f("projection", matrices.projection);
 
-        renderer.draw(square, shader, matrices);
+        renderer.submit(entity);
 
         glfwSwapBuffers(window.getHandle());
         glfwPollEvents();

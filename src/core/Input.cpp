@@ -18,7 +18,7 @@ void Input::use()
 }
 
 
-void Input::handleKeyInput(Player &player, Camera &camera)
+void Input::handleKeyInput(Player &player, const Camera &camera)
 {
     glm::vec3 moveDir{0.0f};
     glm::vec3 right = glm::normalize(

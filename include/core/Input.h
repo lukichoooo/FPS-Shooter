@@ -25,7 +25,7 @@ class Input
     Input(const InputConfig &config, GLFWwindow *window);
 
     // @brief changes player position
-    void handleKeyInput(Player &player, Camera &camera);
+    void handleKeyInput(Player &player, const Camera &camera);
 
     // @brief changes camera orientation
     void handleMouseSensorInput(Camera &camera);
