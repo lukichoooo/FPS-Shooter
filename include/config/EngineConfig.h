@@ -24,6 +24,8 @@ struct CameraConfig
     float FOV{90.0f};
     float nearPlane{0.1f};
     float farPlane{100.0f};
+    glm::vec3 front{0.0f, 0.0f, -1.0f};
+    glm::vec3 up{0.0f, 1.0f, 0.0f};
 };
 
 struct ShaderConfig

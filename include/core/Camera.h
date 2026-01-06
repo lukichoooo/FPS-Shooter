@@ -7,15 +7,13 @@
 class Camera
 {
   private:
+    CameraConfig config;
     float FOV = 90.0f;
-
-    float yaw{};
-    float pitch{};
-
     glm::vec3 front;
     glm::vec3 up;
 
-    CameraConfig config;
+    float yaw{};
+    float pitch{};
 
   public:
     Camera(const CameraConfig &config);

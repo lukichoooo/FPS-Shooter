@@ -23,19 +23,15 @@ void Input::use()
 void Input::handleKeyboardInput(Player &player, Camera &camera)
 {
     glm::vec3 moveDir{0.0f};
-
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        moveDir += camera.getFront();
-
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        moveDir -= camera.getFront();
-
     glm::vec3 right = glm::normalize(
         glm::cross(camera.getFront(), camera.getUp()));
 
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        moveDir += camera.getFront();
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        moveDir -= camera.getFront();
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         moveDir += right;
-
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         moveDir -= right;
 

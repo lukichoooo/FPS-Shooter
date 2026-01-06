@@ -35,7 +35,7 @@ void Engine::run()
         {{-1.0, 1.0, 0.0}},
         {{1.0, 1.0, 0.0}},
         {{1.0, -1.0, 0.0}},
-        {{-1.0, -1.0, -1.0}},
+        {{-1.0, -1.0, 0.0}},
     };
 
     GLuint indices[] = {0, 1, 3,
@@ -54,15 +54,15 @@ void Engine::run()
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     shader.use();
-    // input.use();
+    input.use();
 
 
     while (!glfwWindowShouldClose(window.getHandle()))
     {
         updateDeltaTime();
 
-        // input.handleMouseInput(camera);
-        // input.handleKeyboardInput(player, camera);
+        input.handleKeyboardInput(player, camera);
+        input.handleMouseInput(camera);
 
         camera.updateView(player, matrices);
         camera.updateProjection(matrices);

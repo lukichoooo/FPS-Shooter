@@ -5,13 +5,18 @@
 
 
 Camera::Camera(const CameraConfig &config)
-    : config(config) {}
+    : config(config),
+      FOV(config.FOV),
+      front(config.front),
+      up(config.up)
+{
+}
 
 void Camera::updateView(const Player &player, SpaceMatrices &matrices) const
 {
     matrices.view = glm::lookAt(
         player.getPos(),
-        front,
+        player.getPos() + front,
         up);
 }
 
@@ -19,7 +24,7 @@ void Camera::updateView(const Player &player, SpaceMatrices &matrices) const
 void Camera::updateProjection(SpaceMatrices &matrices)
 {
     matrices.projection = glm::perspective(
-        glm::radians(config.FOV),
+        glm::radians(FOV),
         (float)config.width / (float)config.height,
         config.nearPlane,
         config.farPlane);
