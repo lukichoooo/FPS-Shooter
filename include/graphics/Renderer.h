@@ -17,11 +17,12 @@ class Renderer
 
     // @brief changes binded Vertex Array and Shader
     void draw(
-        const Mesh &mesh,
+        const std::span<Mesh> meshes,
         const Shader &shader,
-        const SpaceMatrices &matrices) const;
+        SpaceMatrices &matrices)
+        const;
 
   private:
-    RenderConfig renderConfig;
+    RenderConfig config;
     Window &window;
 };

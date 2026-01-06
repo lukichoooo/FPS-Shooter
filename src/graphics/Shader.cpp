@@ -4,6 +4,8 @@
 #include <GL/glext.h>
 #include <cstdlib>
 #include <fstream>
+#include <glm/ext/matrix_float4x4.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <graphics/Shader.h>
 #include <sstream>
 
@@ -75,13 +77,13 @@ void Shader::setFloat(const char *name, float value) const
     glUniform1f(glGetUniformLocation(programId, name), value);
 }
 
-void Shader::setMat4f(const char *name, const float *matrix) const
+void Shader::setMat4f(const char *name, const glm::mat4 &matrix) const
 {
     glUniformMatrix4fv(
         glGetUniformLocation(programId, name),
         1,
         GL_FALSE,
-        matrix);
+        glm::value_ptr(matrix));
 }
 
 

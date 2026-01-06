@@ -1,7 +1,9 @@
-#include "config/EngineConfig.h"
-#include "core/Dtos.h"
 #include "game/Engine.h"
-#include <GL/gl.h>
+#include "config/EngineConfig.h"
+#include "core/Camera.h"
+#include "core/Dtos.h"
+#include "core/Input.h"
+#include "game/Player.h"
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -13,14 +15,21 @@ Engine::Engine(const EngineConfig &cfg)
       renderer(cfg.render, window) {}
 
 
+FrameClock frameCLock;
+
+void updateDeltaTime()
+{
+    float currentFrame = glfwGetTime();
+    frameCLock.deltaTime = currentFrame - frameCLock.lastFrame;
+    frameCLock.lastFrame = currentFrame;
+}
+
 void Engine::run()
 {
-
     Shader shader(config.shader);
     shader.addVertexShader();
     shader.addFragmentShader();
     shader.linkProgram();
-    shader.use();
 
     Vertex vertices[] = {
         {{-1.0, 1.0, 0.0}},
@@ -32,34 +41,37 @@ void Engine::run()
     GLuint indices[] = {0, 1, 3,
                         1, 2, 3};
 
-    Mesh mesh;
-    mesh.createMesh(vertices, indices);
+    Mesh squares[1];
+    squares[0].createMesh(vertices, indices);
 
     SpaceMatrices matrices;
-    matrices.projection = glm::perspective(
-        glm::radians(65.0f),
-        (float)config.window.width / (float)config.window.height,
-        0.1f,
-        100.0f);
-    shader.setMat4f("projection", glm::value_ptr(matrices.projection));
 
-    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    Camera camera(config.camera);
+    Player player(config.player);
+    Input input(config.input, window.getHandle(), frameCLock);
+
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    shader.use();
+    // input.use();
+
 
     while (!glfwWindowShouldClose(window.getHandle()))
     {
+        updateDeltaTime();
+
+        // input.handleMouseInput(camera);
+        // input.handleKeyboardInput(player, camera);
+
+        camera.updateView(player, matrices);
+        camera.updateProjection(matrices);
+
+        shader.setMat4f("view", matrices.view);
+        shader.setMat4f("projection", matrices.projection);
+
         renderer.clear();
-
-        matrices.model = glm::mat4(1.0f);
-        matrices.model = glm::scale(matrices.model, glm::vec3(0.5f));
-
-        matrices.view = glm::lookAt(
-            glm::vec3(0.0f, 0.0f, 5.0f), // camera position
-            glm::vec3(0.0f, 0.0f, 0.0f), // target
-            glm::vec3(0.0f, 1.0f, 0.0f)  // up
-        );
-
-        renderer.draw(mesh, shader, matrices);
-
+        renderer.draw(squares, shader, matrices);
 
         glfwSwapBuffers(window.getHandle());
         glfwPollEvents();

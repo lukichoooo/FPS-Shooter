@@ -13,3 +13,15 @@ struct Vertex
 {
     glm::vec3 position;
 };
+
+struct MousePos
+{
+    double X;
+    double Y;
+};
+
+struct FrameClock
+{
+    float lastFrame;
+    float deltaTime;
+};

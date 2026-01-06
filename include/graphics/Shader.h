@@ -2,6 +2,7 @@
 
 #include "config/EngineConfig.h"
 #include <GL/glew.h>
+#include <glm/ext/matrix_float4x4.hpp>
 #include <string>
 
 class Shader
@@ -30,5 +31,5 @@ class Shader
     void setFloat(const char *name, float value) const;
 
     // @brief after glUseProgram
-    void setMat4f(const char *name, const float *matrix) const;
+    void setMat4f(const char *name, const glm::mat4 &matrix) const;
 };

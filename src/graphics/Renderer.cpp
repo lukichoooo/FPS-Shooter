@@ -1,13 +1,10 @@
 #include "graphics/Renderer.h"
-#include "config/EngineConfig.h"
-#include "core/Window.h"
-#include "graphics/Shader.h"
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
 Renderer::Renderer(const RenderConfig &config, Window &window)
-    : renderConfig(config),
+    : config(config),
       window(window)
 {
     glEnable(GL_DEPTH_TEST);
@@ -17,25 +14,31 @@ Renderer::Renderer(const RenderConfig &config, Window &window)
 void Renderer::clear() const
 {
     glClearColor(
-        renderConfig.clearColor.r,
-        renderConfig.clearColor.g,
-        renderConfig.clearColor.b,
-        renderConfig.clearColor.a);
+        config.clearColor.r,
+        config.clearColor.g,
+        config.clearColor.b,
+        config.clearColor.a);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Renderer::draw(
-    const Mesh &mesh,
+    const std::span<Mesh> meshes,
     const Shader &shader,
-    const SpaceMatrices &matrices)
+    SpaceMatrices &matrices)
     const
 {
-    shader.use();
-    glBindVertexArray(mesh.getVAO());
 
-    shader.setMat4f("view", glm::value_ptr(matrices.view));
-    shader.setMat4f("model", glm::value_ptr(matrices.model));
+    for (const Mesh &mesh : meshes)
+    {
+        glBindVertexArray(mesh.getVAO());
 
-    glDrawElements(GL_TRIANGLES, mesh.getIndexCount(), GL_UNSIGNED_INT, 0);
+        // TODO: move those out
+        matrices.model = glm::mat4(1.0f);
+        matrices.model = glm::scale(matrices.model, glm::vec3(0.5f));
+
+        shader.setMat4f("model", matrices.model);
+
+        glDrawElements(GL_TRIANGLES, mesh.getIndexCount(), GL_UNSIGNED_INT, 0);
+    }
 };

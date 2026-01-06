@@ -12,9 +12,12 @@ add_executable(${PROJECT_NAME} src/main.cpp)
 target_sources(${PROJECT_NAME} PRIVATE
     # Core
     src/core/Window.cpp
+    src/core/Camera.cpp
+    src/core/Input.cpp
 
     # Game
     src/game/Engine.cpp
+    src/game/Player.cpp
     src/game/Mesh.cpp
 
     # Graphics
