@@ -4,4 +4,5 @@
 
 Player::Player(
     const PlayerConfig &config)
-    : config(config), character(config.characterConfig) {}
+    : config(config),
+      character(config.characterConfig) {}

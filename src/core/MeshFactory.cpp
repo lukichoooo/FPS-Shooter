@@ -6,7 +6,6 @@
 
 Mesh *MeshFactory::buildSquare(const glm::vec4 &color)
 {
-
     if (index >= MeshFactoryConfig::meshesSize)
     {
         spdlog::error("MeshFactory storage full!");
@@ -24,7 +23,7 @@ Mesh *MeshFactory::buildSquare(const glm::vec4 &color)
         0, 1, 3,
         1, 2, 3};
 
-    meshesStorage[index] = Mesh(vertices, indices, color);
+    meshesStorage[index].createMesh(vertices, indices, color);
 
 #ifdef DEBUG
     spdlog::info("Built Square stored at index={}", index);
@@ -60,7 +59,7 @@ Mesh *MeshFactory::buildPyramid(const glm::vec4 &color)
         2, 3, 4,
         3, 0, 4};
 
-    meshesStorage[index] = Mesh(vertices, indices, color);
+    meshesStorage[index].createMesh(vertices, indices, color);
 
 #ifdef DEBUG
     spdlog::info("Built Pyramid stored at index={}", index);

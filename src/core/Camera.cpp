@@ -1,10 +1,10 @@
-// #define DEBUG
+#define DEBUG
 
 #include "core/Camera.h"
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-// #include "spdlog/spdlog.h"
+#include "spdlog/spdlog.h"
 
 
 Camera::Camera(
@@ -29,7 +29,8 @@ void Camera::updateView(const glm::vec3 &pos)
     front = glm::normalize(direction);
 
 #ifdef DEBUG
-    spdlog::info("Camera looking at x={},y={},z={}", front.x, front.y, front.z);
+    spdlog::info("Camera front=({},{},{}), pos=({},{},{})",
+        front.x, front.y, front.z, pos.x, pos.y, pos.z);
 #endif
 
     view = glm::lookAt(pos, pos + front, up);

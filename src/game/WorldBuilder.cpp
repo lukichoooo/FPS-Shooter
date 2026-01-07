@@ -13,14 +13,16 @@ Scene WorldBuilder::buildScene(Shader *shader)
     return Scene(
         {
             // static entities
-            StaticEntity(EntityConfigs::Ground, groundMesh, shader),
-            StaticEntity({{-2.0f, 0.0f, 0.0f}}, squareMesh, shader),
-            // StaticEntity(EntityConfigs::Big, squareMesh, shader),
-            StaticEntity({{2.0f, 0.0f, 0.0f}}, pyramidMesh, shader),
-            StaticEntity(EntityConfigs::RotateDown, pyramidMesh, shader),
+
+            // StaticEntity(EntityConfigs::Ground, groundMesh, shader),
+            // StaticEntity({{-2.0f, 0.0f, 0.0f}}, squareMesh, shader),
+            // StaticEntity({{2.0f, 0.0f, 0.0f}}, pyramidMesh, shader),
         },
         {
             // dynamic entities
 
+            Entity(EntityConfigs::Ground, groundMesh, shader),
+            Entity({{-2.0f, 0.0f, 0.0f}}, squareMesh, shader),
+            Entity({{2.0f, 0.0f, 0.0f}}, pyramidMesh, shader),
         });
 }

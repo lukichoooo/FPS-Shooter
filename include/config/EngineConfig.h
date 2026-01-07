@@ -1,5 +1,6 @@
 #pragma once
 
+#include "config/Colors.h"
 #include <cstddef>
 #include <glm/ext/vector_float3.hpp>
 #include <glm/vec4.hpp>
@@ -27,7 +28,7 @@ class SceneConfig
 class EntityConfigStruct
 {
   public:
-    glm::vec3 initialPos{0.0f, 0.0f, 0.0f};
+    glm::vec3 initialPos{0.0f, 7.0f, 0.0f};
     glm::vec3 initialRotation{0.0f, 0.0f, 0.0f};
     glm::vec3 initialScale{1.0f, 1.0f, 1.0f};
 };
@@ -84,7 +85,7 @@ struct WindowConfig
 
 struct RenderConfig
 {
-    glm::vec4 clearColor{0.5f, 1.0f, 1.2f, 1.0f};
+    glm::vec4 clearColor{Colors::SkyBlue};
     bool enableDepthTest{true};
 };
 

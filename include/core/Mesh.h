@@ -15,7 +15,6 @@ class Mesh
 
   public:
     Mesh();
-    Mesh(std::span<Vertex> vertices, std::span<GLuint> indices, const glm::vec4 &color);
     ~Mesh();
 
     int getVAO() const { return VAO; }
@@ -29,4 +28,5 @@ class Mesh
     void setColor(glm::vec4 color) { this->color = color; };
 
     void clear();
+    void createMesh(std::span<Vertex> vertices, std::span<GLuint> indices, const glm::vec4 &color);
 };
