@@ -1,7 +1,10 @@
 #pragma once
 
+#include "core/Mesh.h"
+#include <cstddef>
 #include <glm/ext/vector_float3.hpp>
 #include <glm/vec4.hpp>
+
 
 class EntityConfig
 {
@@ -30,9 +33,11 @@ struct PlayerConfig
 
 // stuff
 
-struct SceneConfig
+
+class MeshFactoryConfig
 {
-    const float gravity = 9.8066f;
+  public:
+    static constexpr size_t totalMeshesSize = 16;
 };
 
 struct InputConfig
@@ -44,8 +49,6 @@ struct InputConfig
 
 struct CameraConfig
 {
-    float width{1280.0f};
-    float height{720.0f};
     float defaultFOV{90.0f};
     float nearPlane{0.1f};
     float farPlane{100.0f};
@@ -82,4 +85,5 @@ struct EngineConfig
     WindowConfig window;
     RenderConfig render;
     ShaderConfig shader;
+    MeshFactoryConfig meshFactory;
 };

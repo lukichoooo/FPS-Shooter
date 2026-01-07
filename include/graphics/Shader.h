@@ -32,4 +32,7 @@ class Shader
 
     // @brief after glUseProgram
     void setMat4f(const char *name, const glm::mat4 &matrix) const;
+
+    // @brief after glUseProgram
+    void setVec4f(const char *name, const glm::vec4 &value) const;
 };

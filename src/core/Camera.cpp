@@ -1,17 +1,24 @@
+// #define DEBUG
+
 #include "core/Camera.h"
+// #include "spdlog/spdlog.h"
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 
-Camera::Camera(const CameraConfig &config)
+Camera::Camera(const CameraConfig &config,
+    std::function<void(int &, int &)> getFrameBufferSize)
     : config(config),
       FOV(config.defaultFOV),
       front(config.front),
-      up(config.up) {}
+      up(config.up)
+{
+    getFrameBufferSize(frameBufferWidth, frameBufferHeight);
+}
 
 
-void Camera::updateView(const glm::vec3 &pos, SpaceMatrices &matrices)
+void Camera::updateView(const glm::vec3 &pos)
 {
     glm::vec3 direction;
     direction.x = glm::cos(glm::radians(pitch)) * glm::cos(glm::radians(yaw));
@@ -19,15 +26,23 @@ void Camera::updateView(const glm::vec3 &pos, SpaceMatrices &matrices)
     direction.z = glm::cos(glm::radians(pitch)) * glm::sin(glm::radians(yaw));
     front = glm::normalize(direction);
 
-    matrices.view = glm::lookAt(pos, pos + front, up);
+#ifdef DEBUG
+    spdlog::info("Camera looking at {},{},{}", front.x, front.y, front.z);
+#endif
+
+    view = glm::lookAt(pos, pos + front, up);
 }
 
 
-void Camera::updateProjection(SpaceMatrices &matrices)
+void Camera::updateProjection()
 {
-    matrices.projection = glm::perspective(
+#ifdef DEBUG
+    spdlog::info("Camera Frame buffer w={},h={}", frameBufferWidth, frameBufferHeight);
+#endif
+
+    projection = glm::perspective(
         glm::radians(FOV),
-        (float)config.width / (float)config.height, // maybe use framebuffer size?
+        (float)frameBufferWidth / (float)frameBufferHeight,
         config.nearPlane,
         config.farPlane);
 }

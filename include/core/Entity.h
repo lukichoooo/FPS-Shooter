@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "game/Mesh.h"
+#include "core/Mesh.h"
 #include "graphics/Shader.h"
 
 class Entity

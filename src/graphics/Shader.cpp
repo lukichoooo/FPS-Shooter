@@ -86,6 +86,14 @@ void Shader::setMat4f(const char *name, const glm::mat4 &matrix) const
         glm::value_ptr(matrix));
 }
 
+void Shader::setVec4f(const char *name, const glm::vec4 &value) const
+{
+    glUniform4fv(
+        glGetUniformLocation(programId, name),
+        1,
+        glm::value_ptr(value));
+}
+
 
 // private helpers
 

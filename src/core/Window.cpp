@@ -6,12 +6,6 @@
 
 Window::Window(const WindowConfig &config)
 {
-    if (!glfwInit())
-    {
-        spdlog::error("Failed to initialize GLFW");
-        glfwTerminate();
-        std::abort();
-    }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -51,12 +45,7 @@ Window::~Window()
     glfwTerminate();
 }
 
-void Window::makeContextCurrent()
-{
-    glfwMakeContextCurrent(window);
-}
-
-void Window::getFramebufferSize(int &width, int &height) const
+void Window::getFrameBufferSize(int &width, int &height) const
 {
     width = bufferWidth;
     height = bufferHeight;

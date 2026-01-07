@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "game/Entity.h"
+#include "core/Entity.h"
 #include <glm/ext/vector_float3.hpp>
 
 class Character : public Entity

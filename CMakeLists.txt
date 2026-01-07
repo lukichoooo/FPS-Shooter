@@ -17,14 +17,15 @@ add_library(GameCore STATIC
     src/core/Window.cpp
     src/core/Camera.cpp
     src/core/Input.cpp
+    src/core/MeshFactory.cpp
+    src/core/Mesh.cpp
+    src/core/Entity.cpp
+    src/core/StaticEntity.cpp
 
     # Game
     src/game/Engine.cpp
     src/game/Player.cpp
-    src/game/Entity.cpp
-    src/game/StaticEntity.cpp
     src/game/entities/Character.cpp
-    src/game/Mesh.cpp
 
     # Graphics
     src/graphics/Renderer.cpp

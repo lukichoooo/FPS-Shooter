@@ -21,6 +21,7 @@ class Mesh
     int getEBO() const { return EBO; }
     int getIndexCount() const { return indexCount; }
     const glm::vec4 &getColor() const { return color; };
+
     void bind() { glBindVertexArray(VAO); }
 
     void setColor(glm::vec4 color) { this->color = color; };

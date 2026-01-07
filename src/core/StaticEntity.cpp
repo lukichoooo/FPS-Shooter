@@ -1,7 +1,9 @@
-#include "game/StaticEntity.h"
+#include "core/StaticEntity.h"
 
 StaticEntity::StaticEntity(EntityConfig config, Mesh *mesh, Shader *shader)
-    : mesh(mesh), shader(shader)
+    : config(config),
+      mesh(mesh),
+      shader(shader)
 {
     model = glm::mat4(1.0f);
     model = glm::translate(model, config.initialPos);
@@ -14,8 +16,9 @@ StaticEntity::StaticEntity(EntityConfig config, Mesh *mesh, Shader *shader)
 
 void StaticEntity::draw() const
 {
+    mesh->bind();
     shader->use();
     shader->setMat4f("model", model);
-    mesh->bind();
+    shader->setVec4f("color", mesh->getColor());
     glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
 }

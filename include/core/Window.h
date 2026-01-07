@@ -4,17 +4,23 @@
 
 class Window
 {
-  public:
-    Window(const WindowConfig &config);
-    ~Window();
-
-    void makeContextCurrent();
-    void getFramebufferSize(int &width, int &height) const;
-
-    GLFWwindow *getHandle() const { return window; }
-
   private:
     GLFWwindow *window{nullptr};
     int bufferWidth{};
     int bufferHeight{};
+
+
+  public:
+    Window(const WindowConfig &config);
+    ~Window();
+
+    void getFrameBufferSize(int &width, int &height) const;
+
+    GLFWwindow *getHandle() const { return window; }
+
+    void makeContextCurrent() { glfwMakeContextCurrent(window); }
+    void swapBuffers() { glfwSwapBuffers(window); }
+    void pollEvents() { glfwPollEvents(); }
+    void destroyWindow() { glfwDestroyWindow(window); }
+    bool windowShouldClose() { return glfwWindowShouldClose(window); }
 };

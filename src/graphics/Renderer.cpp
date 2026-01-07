@@ -1,6 +1,6 @@
 #include "graphics/Renderer.h"
 #include "config/EngineConfig.h"
-#include "game/Entity.h"
+#include "core/Entity.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -26,11 +26,13 @@ void Renderer::submit(Scene &scene)
 {
     for (auto &entity : scene.getDynamicEntities())
     {
-        entity->draw();
+        if (entity)
+            entity->draw();
     }
 
     for (auto &entity : scene.getStaticEntities())
     {
-        entity->draw();
+        if (entity)
+            entity->draw();
     }
 };

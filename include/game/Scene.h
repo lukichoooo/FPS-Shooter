@@ -1,8 +1,7 @@
 #pragma once
 
-#include "game/Entity.h"
-#include "game/StaticEntity.h"
-#include <span>
+#include "core/Entity.h"
+#include "core/StaticEntity.h"
 
 class Scene
 {

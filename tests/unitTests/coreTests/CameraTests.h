@@ -15,12 +15,16 @@ class CameraTests
 inline void CameraTests::updateViewTest()
 {
     CameraConfig config;
-    config.width = 100;
-    config.height = 200;
     config.defaultFOV = 100;
     config.farPlane = 200;
     config.nearPlane = 20;
-    Camera sut(config);
+    float frameBufferWidth = 200;
+    float frameBufferHeight = 100;
+
+    Camera sut(config,
+        [&frameBufferHeight, &frameBufferWidth](int &w, int &h) {
+        w = frameBufferWidth;
+        h = frameBufferHeight; });
 
     glm::vec3 direction;
     direction.x = glm::cos(glm::radians(sut.getPitch()))
@@ -36,35 +40,35 @@ inline void CameraTests::updateViewTest()
     auto expected = glm::lookAt(
         pos, pos + front, sut.up);
 
-    SpaceMatrices matrices;
-
-    sut.updateView(pos, matrices);
+    sut.updateView(pos);
 
     assert(sut.front == front);
-    assert(matrices.view == expected);
+    assert(sut.getView() == expected);
 }
 
 inline void CameraTests::updateProjectionTest()
 {
     CameraConfig config;
-    config.width = 100;
-    config.height = 200;
     config.defaultFOV = 100;
     config.farPlane = 200;
     config.nearPlane = 20;
-    Camera sut(config);
+    float frameBufferWidth = 200;
+    float frameBufferHeight = 100;
 
-    SpaceMatrices matrices;
+    Camera sut(config,
+        [&frameBufferHeight, &frameBufferWidth](int &w, int &h) {
+        w = frameBufferWidth;
+        h = frameBufferHeight; });
 
     auto expected = glm::perspective(
         glm::radians(config.defaultFOV),
-        (float)config.width / (float)config.height,
+        (float)frameBufferWidth / (float)frameBufferHeight,
         config.nearPlane,
         config.farPlane);
 
-    sut.updateProjection(matrices);
+    sut.updateProjection();
 
-    assert(expected == matrices.projection);
+    assert(expected == sut.getProjection());
 }
 
 

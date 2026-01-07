@@ -1,4 +1,4 @@
-#include "game/Entity.h"
+#include "core/Entity.h"
 #include "spdlog/spdlog.h"
 #include <glm/ext/matrix_transform.hpp>
 
@@ -30,6 +30,7 @@ void Entity::draw()
 
     shader->use();
     shader->setMat4f("model", model);
+    shader->setVec4f("color", mesh->getColor());
 
     glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
 }
