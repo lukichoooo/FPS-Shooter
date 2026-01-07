@@ -1,4 +1,4 @@
-#define DEBUG
+// #define DEBUG
 
 #include "core/Camera.h"
 #include <glm/ext/matrix_clip_space.hpp>

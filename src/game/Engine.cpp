@@ -37,7 +37,7 @@ void Engine::run()
     Input input(config.input, window.getHandle());
 
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     shader.use();
     input.use();

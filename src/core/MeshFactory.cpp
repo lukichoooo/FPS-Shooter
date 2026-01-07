@@ -1,4 +1,4 @@
-#define DEBUG
+// #define DEBUG
 
 #include "core/MeshFactory.h"
 #include "spdlog/spdlog.h"
@@ -27,6 +27,61 @@ Mesh *MeshFactory::buildSquare(const glm::vec4 &color)
 
 #ifdef DEBUG
     spdlog::info("Built Square stored at index={}", index);
+#endif
+
+    return &meshesStorage[index++];
+}
+
+Mesh *MeshFactory::buildCube(const glm::vec4 &color)
+{
+    if (index >= MeshFactoryConfig::meshesSize)
+    {
+        spdlog::error("MeshFactory storage full!");
+        return nullptr;
+    }
+
+    Vertex vertices[] = {
+        {{0.0, 0.0, 1.0}},
+        {{1.0, 0.0, 1.0}},
+        {{1.0, 0.0, 0.0}},
+        {{0.0, 0.0, 0.0}},
+
+        {{0.0, 1.0, 1.0}},
+        {{1.0, 1.0, 1.0}},
+        {{1.0, 1.0, 0.0}},
+        {{0.0, 1.0, 0.0}},
+    };
+
+    GLuint indices[] = {
+        // bottom (y = 0)
+        0, 1, 3,
+        1, 2, 3,
+
+        // top (y = 1)
+        4, 5, 7,
+        5, 6, 7,
+
+        // front (z = 1)
+        0, 1, 4,
+        1, 5, 4,
+
+        // back (z = 0)
+        3, 2, 7,
+        2, 6, 7,
+
+        // left (x = 0)
+        0, 3, 4,
+        3, 7, 4,
+
+        // right (x = 1)
+        1, 2, 5,
+        2, 6, 5};
+
+
+    meshesStorage[index].createMesh(vertices, indices, color);
+
+#ifdef DEBUG
+    spdlog::info("Built Cube stored at index={}", index);
 #endif
 
     return &meshesStorage[index++];

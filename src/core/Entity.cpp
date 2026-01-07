@@ -1,4 +1,4 @@
-#define DEBUG
+// #define DEBUG
 
 #include "core/Entity.h"
 #include "spdlog/spdlog.h"

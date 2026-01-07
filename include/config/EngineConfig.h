@@ -28,7 +28,7 @@ class SceneConfig
 class EntityConfigStruct
 {
   public:
-    glm::vec3 initialPos{0.0f, 7.0f, 0.0f};
+    glm::vec3 initialPos{0.0f, 0.0f, 0.0f};
     glm::vec3 initialRotation{0.0f, 0.0f, 0.0f};
     glm::vec3 initialScale{1.0f, 1.0f, 1.0f};
 };
@@ -40,13 +40,18 @@ class CharacterConfig : public EntityConfigStruct
     float jumpStrength{1.0f};
     float walkSpeed{5.0f};
 
-    float runSpeedMultiplier{3.0f};
+    float runSpeedMultiplier{3.5f};
 };
 
 struct PlayerConfig
 {
     float speedFovMultiplier{1.4f};
     CharacterConfig characterConfig;
+
+    PlayerConfig()
+    {
+        characterConfig.initialPos = {0, 5, 0};
+    }
 };
 
 
