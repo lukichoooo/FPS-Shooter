@@ -6,7 +6,6 @@
 
 Window::Window(const WindowConfig &config)
 {
-
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -22,8 +21,10 @@ Window::Window(const WindowConfig &config)
 
     glfwMakeContextCurrent(window);
 
+    int bufferWidth, bufferHeight;
     glfwGetFramebufferSize(window, &bufferWidth, &bufferHeight);
 
+    // this has to be before world buildin brah TODOOOO
     if (glewInit() != GLEW_OK)
     {
         spdlog::error("Failed to initialize GLEW");
@@ -47,6 +48,5 @@ Window::~Window()
 
 void Window::getFrameBufferSize(int &width, int &height) const
 {
-    width = bufferWidth;
-    height = bufferHeight;
+    glfwGetFramebufferSize(window, &width, &height);
 }

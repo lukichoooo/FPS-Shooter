@@ -7,16 +7,10 @@
 class MeshFactory
 {
   private:
-    MeshFactoryConfig config;
-
-    std::aligned_storage_t<sizeof(Mesh), alignof(Mesh)>
-        storage[MeshFactoryConfig::totalMeshesSize];
-    std::span<Mesh> meshes;
-
+    Mesh meshesStorage[MeshFactoryConfig::meshesSize];
     size_t index{};
 
   public:
-    MeshFactory(const MeshFactoryConfig &config);
-    Mesh *buildSquare();
-    Mesh *buildPyramid();
+    Mesh *buildSquare(const glm::vec4 &color);
+    Mesh *buildPyramid(const glm::vec4 &color);
 };

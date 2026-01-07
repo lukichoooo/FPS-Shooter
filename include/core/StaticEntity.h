@@ -7,7 +7,7 @@
 
 class StaticEntity
 {
-    EntityConfig config;
+    EntityConfigStruct config;
 
     Mesh *mesh;
     Shader *shader;
@@ -16,7 +16,8 @@ class StaticEntity
 
 
   public:
-    StaticEntity(EntityConfig config, Mesh *mesh, Shader *shader);
+    StaticEntity();
+    StaticEntity(EntityConfigStruct config, Mesh *mesh, Shader *shader);
 
 
     const glm::mat4 getModel() { return model; }

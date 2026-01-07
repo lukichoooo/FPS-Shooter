@@ -1,12 +1,30 @@
 #pragma once
 
-#include "core/Mesh.h"
 #include <cstddef>
 #include <glm/ext/vector_float3.hpp>
 #include <glm/vec4.hpp>
 
 
-class EntityConfig
+// static
+
+
+class MeshFactoryConfig
+{
+  public:
+    static constexpr size_t meshesSize = 16;
+};
+
+class SceneConfig
+{
+  public:
+    static constexpr size_t staticEntitiesSize = 16;
+    static constexpr size_t dynamicEntitiesSize = 16;
+};
+
+// other
+
+
+class EntityConfigStruct
 {
   public:
     glm::vec3 initialPos{0.0f, 0.0f, 0.0f};
@@ -14,7 +32,7 @@ class EntityConfig
     glm::vec3 initialScale{1.0f, 1.0f, 1.0f};
 };
 
-class CharacterConfig : public EntityConfig
+class CharacterConfig : public EntityConfigStruct
 {
   public:
     float height{2.0f};
@@ -33,12 +51,6 @@ struct PlayerConfig
 
 // stuff
 
-
-class MeshFactoryConfig
-{
-  public:
-    static constexpr size_t totalMeshesSize = 16;
-};
 
 struct InputConfig
 {
@@ -77,6 +89,9 @@ struct RenderConfig
 };
 
 
+// big
+
+
 struct EngineConfig
 {
     PlayerConfig player;
@@ -85,5 +100,4 @@ struct EngineConfig
     WindowConfig window;
     RenderConfig render;
     ShaderConfig shader;
-    MeshFactoryConfig meshFactory;
 };

@@ -1,19 +1,21 @@
 #define DEBUG
 
 #include "core/MeshFactory.h"
-#include "config/Colors.h"
-#include "config/EngineConfig.h"
 #include "spdlog/spdlog.h"
 
 
-MeshFactory::MeshFactory(const MeshFactoryConfig &config)
-    : config(config) {}
-
-Mesh *MeshFactory::buildSquare()
+Mesh *MeshFactory::buildSquare(const glm::vec4 &color)
 {
+
+    if (index >= MeshFactoryConfig::meshesSize)
+    {
+        spdlog::error("MeshFactory storage full!");
+        return nullptr;
+    }
+
     Vertex vertices[] = {
-        {{0.0, 1.0, 0.0}},
-        {{1.0, 1.0, 0.0}},
+        {{0.0, 0.0, 1.0}},
+        {{1.0, 0.0, 1.0}},
         {{1.0, 0.0, 0.0}},
         {{0.0, 0.0, 0.0}},
     };
@@ -22,19 +24,24 @@ Mesh *MeshFactory::buildSquare()
         0, 1, 3,
         1, 2, 3};
 
-    Mesh *m = new (&storage[index]) Mesh(vertices, indices, Colors::Silver);
-    meshes = std::span<Mesh>(reinterpret_cast<Mesh *>(storage), index + 1);
+    meshesStorage[index] = Mesh(vertices, indices, color);
 
 #ifdef DEBUG
-    spdlog::info("Built Square stored at index{}", index);
+    spdlog::info("Built Square stored at index={}", index);
 #endif
 
-    index++;
-    return m;
+    return &meshesStorage[index++];
 }
 
-Mesh *MeshFactory::buildPyramid()
+
+Mesh *MeshFactory::buildPyramid(const glm::vec4 &color)
 {
+    if (index >= MeshFactoryConfig::meshesSize)
+    {
+        spdlog::error("MeshFactory storage full!");
+        return nullptr;
+    }
+
     Vertex vertices[] = {
         {{0.0, 0.0, 0.0}},
         {{1.0, 0.0, 0.0}},
@@ -53,14 +60,11 @@ Mesh *MeshFactory::buildPyramid()
         2, 3, 4,
         3, 0, 4};
 
-
-    Mesh *m = new (&storage[index]) Mesh(vertices, indices, Colors::Silver);
-    meshes = std::span<Mesh>(reinterpret_cast<Mesh *>(storage), index + 1);
+    meshesStorage[index] = Mesh(vertices, indices, color);
 
 #ifdef DEBUG
-    spdlog::info("Built Pyramid stored at index{}", index);
+    spdlog::info("Built Pyramid stored at index={}", index);
 #endif
 
-    index++;
-    return m;
+    return &meshesStorage[index++];
 }

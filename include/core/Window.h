@@ -1,4 +1,5 @@
 #pragma once
+
 #include <GLFW/glfw3.h>
 #include "config/EngineConfig.h"
 
@@ -6,8 +7,6 @@ class Window
 {
   private:
     GLFWwindow *window{nullptr};
-    int bufferWidth{};
-    int bufferHeight{};
 
 
   public:

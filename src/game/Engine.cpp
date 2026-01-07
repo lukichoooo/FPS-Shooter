@@ -1,9 +1,9 @@
-#include "core/MeshFactory.h"
-#include "core/Mesh.h"
+// #define DEBUG
+
 #include "game/Engine.h"
 #include "config/EngineConfig.h"
 #include "game/Scene.h"
-#include "core/StaticEntity.h"
+#include "game/WorldBuilder.h"
 #include "graphics/Renderer.h"
 #include "core/Camera.h"
 #include "core/Input.h"
@@ -14,12 +14,13 @@
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/trigonometric.hpp>
+// #include "spdlog/spdlog.h"
 
 Engine::Engine(const EngineConfig &config)
     : config(config),
       window(config.window),
       renderer(config.render),
-      meshBuilder(config.meshFactory) {}
+      worldBuilder() {}
 
 
 void Engine::run()
@@ -41,19 +42,8 @@ void Engine::run()
     shader.use();
     input.use();
 
-    Mesh *square = meshBuilder.buildSquare();
-    Mesh *pyramid = meshBuilder.buildPyramid();
+    Scene scene = worldBuilder.buildScene(&shader);
 
-    // Create some entities
-    StaticEntity entity1({}, square, &shader);
-    StaticEntity entity2({{2.0f, 0.0f, 0.0f}}, pyramid, &shader);
-    StaticEntity entity3({{-2.0f, 0.0f, 0.0f}}, square, &shader);
-
-    // Create an array of pointers
-    StaticEntity *staticEntities[] = {&entity1, &entity2, &entity3};
-
-    Scene scene;
-    scene.setStaticEntities(staticEntities);
 
     while (!window.windowShouldClose())
     {
@@ -68,11 +58,17 @@ void Engine::run()
         shader.setMat4f("view", camera.getView());
         shader.setMat4f("projection", camera.getProjection());
 
+#ifdef DEBUG
+        spdlog::info("begining frame rendering");
+#endif
         renderer.beginFrame();
         renderer.submit(scene);
 
         window.swapBuffers();
         window.pollEvents();
+#ifdef DEBUG
+        spdlog::info("succesfully rendered frame");
+#endif
     }
 
     window.destroyWindow();

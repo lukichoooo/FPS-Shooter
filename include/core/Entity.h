@@ -7,7 +7,7 @@
 class Entity
 {
   private:
-    EntityConfig config;
+    EntityConfigStruct config;
 
     Mesh *mesh;
     Shader *shader;
@@ -21,7 +21,8 @@ class Entity
 
 
   public:
-    Entity(const EntityConfig &config, Mesh *mesh, Shader *shader);
+    Entity();
+    Entity(const EntityConfigStruct &config, Mesh *mesh, Shader *shader);
     virtual ~Entity() = default;
 
     const glm::vec3 &getPos() const { return pos; }

@@ -1,7 +1,17 @@
 #include "core/Mesh.h"
 
+Mesh::Mesh()
+    : VAO(0),
+      VBO(0),
+      EBO(0),
+      indexCount(0) {}
+
 Mesh::Mesh(std::span<Vertex> vertices, std::span<GLuint> indices, const glm::vec4 &color)
-    : VAO(0), VBO(0), EBO(0), indexCount(0), color(color)
+    : VAO(0),
+      VBO(0),
+      EBO(0),
+      indexCount(0),
+      color(color)
 {
     indexCount = static_cast<GLuint>(indices.size());
 

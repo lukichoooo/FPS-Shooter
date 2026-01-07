@@ -1,8 +1,15 @@
+// #define DEBUG
+
 #include "core/Entity.h"
 #include "spdlog/spdlog.h"
 #include <glm/ext/matrix_transform.hpp>
 
-Entity::Entity(const EntityConfig &config, Mesh *mesh, Shader *shader)
+Entity::Entity()
+    : config(),
+      mesh(nullptr),
+      shader(nullptr) {}
+
+Entity::Entity(const EntityConfigStruct &config, Mesh *mesh, Shader *shader)
     : config(config),
       mesh(mesh),
       shader(shader),
@@ -33,4 +40,8 @@ void Entity::draw()
     shader->setVec4f("color", mesh->getColor());
 
     glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
+
+#ifdef DEBUG
+    spdlog::info("Finished Drawing Entity");
+#endif
 }

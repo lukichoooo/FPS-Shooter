@@ -1,14 +1,16 @@
 // #define DEBUG
 
 #include "core/Camera.h"
-// #include "spdlog/spdlog.h"
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+// #include "spdlog/spdlog.h"
 
 
-Camera::Camera(const CameraConfig &config,
+Camera::Camera(
+    const CameraConfig &config,
     std::function<void(int &, int &)> getFrameBufferSize)
+
     : config(config),
       FOV(config.defaultFOV),
       front(config.front),
@@ -27,7 +29,7 @@ void Camera::updateView(const glm::vec3 &pos)
     front = glm::normalize(direction);
 
 #ifdef DEBUG
-    spdlog::info("Camera looking at {},{},{}", front.x, front.y, front.z);
+    spdlog::info("Camera looking at x={},y={},z={}", front.x, front.y, front.z);
 #endif
 
     view = glm::lookAt(pos, pos + front, up);
@@ -37,7 +39,7 @@ void Camera::updateView(const glm::vec3 &pos)
 void Camera::updateProjection()
 {
 #ifdef DEBUG
-    spdlog::info("Camera Frame buffer w={},h={}", frameBufferWidth, frameBufferHeight);
+    spdlog::info("Camera Frame buffer w={},h={},Fov={}", frameBufferWidth, frameBufferHeight, FOV);
 #endif
 
     projection = glm::perspective(

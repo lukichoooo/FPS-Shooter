@@ -1,6 +1,14 @@
+#define DEBUG
+
+#include "spdlog/spdlog.h"
 #include "core/StaticEntity.h"
 
-StaticEntity::StaticEntity(EntityConfig config, Mesh *mesh, Shader *shader)
+StaticEntity::StaticEntity()
+    : config(),
+      mesh(nullptr),
+      shader(nullptr) {}
+
+StaticEntity::StaticEntity(EntityConfigStruct config, Mesh *mesh, Shader *shader)
     : config(config),
       mesh(mesh),
       shader(shader)
@@ -16,9 +24,20 @@ StaticEntity::StaticEntity(EntityConfig config, Mesh *mesh, Shader *shader)
 
 void StaticEntity::draw() const
 {
+    if (!mesh)
+    {
+        spdlog::info("StaticEntity Mesh is null, cant Draw");
+        return;
+    }
+
     mesh->bind();
     shader->use();
     shader->setMat4f("model", model);
     shader->setVec4f("color", mesh->getColor());
+
     glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
+
+#ifdef DEBUG
+    spdlog::info("Finished Drawing StaticEntity");
+#endif
 }

@@ -26,13 +26,11 @@ void Renderer::submit(Scene &scene)
 {
     for (auto &entity : scene.getDynamicEntities())
     {
-        if (entity)
-            entity->draw();
+        entity.draw();
     }
 
-    for (auto &entity : scene.getStaticEntities())
+    for (auto &staticEntity : scene.getStaticEntities())
     {
-        if (entity)
-            entity->draw();
+        staticEntity.draw();
     }
 };
