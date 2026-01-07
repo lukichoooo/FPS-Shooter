@@ -20,7 +20,7 @@ class StaticEntity
     StaticEntity(EntityConfigStruct config, Mesh *mesh, Shader *shader);
 
 
-    const glm::mat4 getModel() { return model; }
+    const glm::mat4 &getModel() { return model; }
 
     void setModel(const glm::mat4 &model) { this->model = model; }
 

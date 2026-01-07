@@ -12,7 +12,7 @@ Scene::Scene(
         if (size_staticEntities >= SceneConfig::dynamicEntitiesSize)
         {
             spdlog::error("static entities array full, size={}", size_staticEntities);
-            std::abort();
+            break;
         }
         this->staticEntities[size_staticEntities++] = e;
     }
@@ -20,8 +20,8 @@ Scene::Scene(
     {
         if (size_staticEntities >= SceneConfig::staticEntitiesSize)
         {
-            spdlog::error("static entities array full, size={}", size_staticEntities);
-            std::abort();
+            spdlog::error("dynamic entities array full, size={}", size_staticEntities);
+            break;
         }
         this->dynamicEntities[size_dynamicEntities++] = e;
     }
@@ -30,10 +30,10 @@ Scene::Scene(
 
 void Scene::addStaticEntity(const StaticEntity &entity)
 {
-    if (size_staticEntities >= SceneConfig::dynamicEntitiesSize)
+    if (size_staticEntities >= SceneConfig::staticEntitiesSize)
     {
         spdlog::error("static entities array full, size={}", size_staticEntities);
-        std::abort();
+        return;
     }
     this->staticEntities[size_staticEntities++] = entity;
 }
@@ -42,8 +42,8 @@ void Scene::addEntity(const Entity &entity)
 {
     if (size_dynamicEntities >= SceneConfig::dynamicEntitiesSize)
     {
-        spdlog::error("entities array full, size={}", size_dynamicEntities);
-        std::abort();
+        spdlog::error("dynamic entities array full, size={}", size_dynamicEntities);
+        return;
     }
     this->dynamicEntities[size_dynamicEntities++] = entity;
 }

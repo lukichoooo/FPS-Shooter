@@ -72,7 +72,7 @@ inline void CameraTests::updateProjectionTest()
 }
 
 
-inline void cameraTests()
+inline void _cameraTests()
 {
     CameraTests sut;
     sut.updateViewTest();

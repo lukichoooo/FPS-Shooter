@@ -4,7 +4,7 @@
 #include "core/Mesh.h"
 
 // @brief stores all meshes on stack
-class MeshFactory
+class MeshFactory // TODO: Write tests
 {
   private:
     Mesh meshesStorage[MeshFactoryConfig::meshesSize];
