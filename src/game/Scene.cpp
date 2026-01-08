@@ -5,7 +5,7 @@
 
 Scene::Scene(
     std::initializer_list<StaticEntity> staticEntities,
-    std::initializer_list<Entity> dynamicEntities)
+    std::initializer_list<DynamicEntity> dynamicEntities)
 {
     for (auto &e : staticEntities)
     {
@@ -38,7 +38,7 @@ void Scene::addStaticEntity(const StaticEntity &entity)
     this->staticEntities[size_staticEntities++] = entity;
 }
 
-void Scene::addEntity(const Entity &entity)
+void Scene::addEntity(const DynamicEntity &entity)
 {
     if (size_dynamicEntities >= SceneConfig::dynamicEntitiesSize)
     {

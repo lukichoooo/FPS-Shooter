@@ -4,6 +4,7 @@
 
 struct Colors
 {
+
     // ===== Whites / Blacks / Grays =====
     static inline const glm::vec4 White{1.0f, 1.0f, 1.0f, 1.0f};
     static inline const glm::vec4 Black{0.0f, 0.0f, 0.0f, 1.0f};
@@ -58,4 +59,8 @@ struct Colors
     static inline const glm::vec4 Brown{0.6f, 0.3f, 0.1f, 1.0f};
     static inline const glm::vec4 DarkBrown{0.4f, 0.2f, 0.1f, 1.0f};
     static inline const glm::vec4 Chocolate{0.82f, 0.41f, 0.12f, 1.0f};
+
+    // ______________________EXTRA
+
+    static inline const glm::vec4 Default = Silver;
 };

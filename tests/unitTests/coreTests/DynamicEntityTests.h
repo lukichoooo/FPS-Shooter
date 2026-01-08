@@ -1,26 +1,26 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "core/Entity.h"
 #include "core/MeshFactory.h"
+#include "core/entities/DynamicEntity.h"
 #include "graphics/Shader.h"
 #include "unitTests/testsHelper/ShaderTestsHelper.h"
 
-class EntityTests
+class DynamicEntityTests
 {
   public:
     void
     test_entity_pos()
     {
         EntityConfigStruct cfg;
-        cfg.initialPos = {1.0f, 2.0f, 3.0f};
-        cfg.initialScale = {2.0f, 2.0f, 2.0f};
+        cfg.pos = {1.0f, 2.0f, 3.0f};
+        cfg.scale = {2.0f, 2.0f, 2.0f};
 
         MeshFactory factory;
-        Mesh *mesh = factory.buildSquare({1, 1, 1, 1});
+        Mesh *mesh = factory.buildNewSquare();
         Shader shader = _makeTestShader();
 
-        Entity e(cfg, mesh, &shader);
+        DynamicEntity e(cfg, mesh);
 
         glm::vec3 pos = e.getPos();
 
@@ -33,18 +33,18 @@ class EntityTests
     void test_entity_draw_valid()
     {
         MeshFactory factory;
-        Mesh *mesh = factory.buildSquare({0, 1, 0, 1});
+        Mesh *mesh = factory.buildNewSquare();
         Shader shader = _makeTestShader();
 
-        Entity e({}, mesh, &shader);
-        e.draw(); // should not crash
+        DynamicEntity e({}, mesh);
+        e.draw(shader); // should not crash
     }
 };
 
 
-inline void _entityTests()
+inline void _dynamicEntityTests()
 {
-    EntityTests sut;
+    DynamicEntityTests sut;
     sut.test_entity_draw_valid();
     sut.test_entity_pos();
 }

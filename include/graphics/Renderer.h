@@ -16,5 +16,5 @@ class Renderer
     void beginFrame() const;
 
     // @brief changes binded Vertex Array and Shader
-    void submit(Scene &scene);
+    void submit(Scene &scene, Shader &shader);
 };

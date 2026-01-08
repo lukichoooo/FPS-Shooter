@@ -28,9 +28,31 @@ class SceneConfig
 class EntityConfigStruct
 {
   public:
-    glm::vec3 initialPos{0.0f, 0.0f, 0.0f};
-    glm::vec3 initialRotation{0.0f, 0.0f, 0.0f};
-    glm::vec3 initialScale{1.0f, 1.0f, 1.0f};
+    glm::vec3 pos{0.0f, 0.0f, 0.0f};
+    glm::vec3 rotation{0.0f, 0.0f, 0.0f};
+    glm::vec3 scale{1.0f, 1.0f, 1.0f};
+    glm::vec4 color{Colors::Default};
+
+
+    EntityConfigStruct operator+(const EntityConfigStruct &o) const
+    {
+        return {
+            this->pos + o.pos,
+            this->rotation + o.rotation,
+            this->scale * o.scale,
+            this->color != Colors::Default ? this->color : o.color,
+        };
+    }
+
+    EntityConfigStruct operator+(const glm::vec4 &color) const
+    {
+        return {
+            this->pos,
+            this->rotation,
+            this->scale,
+            this->color != Colors::Default ? this->color : color,
+        };
+    }
 };
 
 class CharacterConfig : public EntityConfigStruct
@@ -50,7 +72,7 @@ struct PlayerConfig
 
     PlayerConfig()
     {
-        characterConfig.initialPos = {0, 5, 0};
+        characterConfig.pos = {0, 5, 0};
     }
 };
 

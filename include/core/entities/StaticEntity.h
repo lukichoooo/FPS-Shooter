@@ -8,21 +8,21 @@
 class StaticEntity
 {
     EntityConfigStruct config;
-
-    Mesh *mesh;
-    Shader *shader;
-
     glm::mat4 model;
+    Mesh *mesh;
+
+    glm::vec4 color{Colors::White};
 
 
   public:
     StaticEntity();
-    StaticEntity(EntityConfigStruct config, Mesh *mesh, Shader *shader);
-
+    StaticEntity(EntityConfigStruct config, Mesh *mesh);
 
     const glm::mat4 &getModel() { return model; }
+    const glm::vec4 &getColor() const { return color; };
 
     void setModel(const glm::mat4 &model) { this->model = model; }
+    void setColor(glm::vec4 color) { this->color = color; };
 
-    void draw() const;
+    void draw(Shader &shader) const;
 };

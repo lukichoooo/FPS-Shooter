@@ -1,12 +1,12 @@
 #pragma once
 
-#include "core/MeshFactory.h"
+#include "core/entities/EntityBuilder.h"
 #include "game/Scene.h"
 
 class WorldBuilder
 {
-    MeshFactory meshFactory;
+    EntityBuilder entityBuilder;
 
   public:
-    Scene buildScene(Shader *shader);
+    Scene buildScene(Shader &shader);
 };

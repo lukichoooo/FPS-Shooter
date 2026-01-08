@@ -1,24 +1,23 @@
 // #define DEBUG
 
-#include "core/Entity.h"
+#include "core/entities/DynamicEntity.h"
 #include "spdlog/spdlog.h"
 #include <glm/ext/matrix_transform.hpp>
 
-Entity::Entity()
+DynamicEntity::DynamicEntity()
     : config(),
-      mesh(nullptr),
-      shader(nullptr) {}
+      mesh(nullptr) {}
 
-Entity::Entity(const EntityConfigStruct &config, Mesh *mesh, Shader *shader)
+DynamicEntity::DynamicEntity(const EntityConfigStruct &config, Mesh *mesh)
     : config(config),
       mesh(mesh),
-      shader(shader),
-      pos(config.initialPos),
-      rotation(config.initialRotation),
-      scale(config.initialScale) {}
+      pos(config.pos),
+      rotation(config.rotation),
+      scale(config.scale),
+      color(config.color) {}
 
 
-void Entity::draw()
+void DynamicEntity::draw(Shader &shader)
 {
     if (!mesh)
     {
@@ -35,9 +34,9 @@ void Entity::draw()
     model = glm::rotate(model, rotation.z, glm::vec3(0, 0, 1));
     model = glm::scale(model, scale);
 
-    shader->use();
-    shader->setMat4f("model", model);
-    shader->setVec4f("color", mesh->getColor());
+    shader.use();
+    shader.setMat4f("model", model);
+    shader.setVec4f("color", color);
 
     glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
 

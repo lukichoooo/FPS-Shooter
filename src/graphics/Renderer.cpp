@@ -1,6 +1,5 @@
 #include "graphics/Renderer.h"
 #include "config/EngineConfig.h"
-#include "core/Entity.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -22,15 +21,15 @@ void Renderer::beginFrame() const
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Renderer::submit(Scene &scene)
+void Renderer::submit(Scene &scene, Shader &shader)
 {
     for (auto &entity : scene.getDynamicEntities())
     {
-        entity.draw();
+        entity.draw(shader);
     }
 
     for (auto &staticEntity : scene.getStaticEntities())
     {
-        staticEntity.draw();
+        staticEntity.draw(shader);
     }
 };

@@ -2,7 +2,7 @@
 
 #include "config/EngineConfig.h"
 #include "core/MeshFactory.h"
-#include "core/StaticEntity.h"
+#include "core/entities/StaticEntity.h"
 #include "graphics/Shader.h"
 #include "unitTests/testsHelper/ShaderTestsHelper.h"
 
@@ -14,14 +14,14 @@ class StaticEntityTests
     test_staticEntity_model()
     {
         EntityConfigStruct cfg;
-        cfg.initialPos = {1.0f, 2.0f, 3.0f};
-        cfg.initialScale = {2.0f, 2.0f, 2.0f};
+        cfg.pos = {1.0f, 2.0f, 3.0f};
+        cfg.scale = {2.0f, 2.0f, 2.0f};
 
         MeshFactory factory;
-        Mesh *mesh = factory.buildSquare({1, 1, 1, 1});
+        Mesh *mesh = factory.buildNewSquare();
         Shader shader = _makeTestShader();
 
-        StaticEntity e(cfg, mesh, &shader);
+        StaticEntity e(cfg, mesh);
 
         glm::mat4 model = e.getModel();
         glm::vec3 pos = glm::vec3(model[3]);
@@ -35,11 +35,11 @@ class StaticEntityTests
     void test_staticEntity_draw_valid()
     {
         MeshFactory factory;
-        Mesh *mesh = factory.buildSquare({0, 1, 0, 1});
+        Mesh *mesh = factory.buildNewSquare();
         Shader shader = _makeTestShader();
 
-        StaticEntity e({}, mesh, &shader);
-        e.draw(); // should not crash
+        StaticEntity e({}, mesh);
+        e.draw(shader); // should not crash
     }
 };
 

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "core/Entity.h"
-#include "core/StaticEntity.h"
+#include "core/entities/StaticEntity.h"
+#include "core/entities/DynamicEntity.h"
 #include <initializer_list>
 
 // @brief stack allocated static and dynamic entites
@@ -10,25 +10,25 @@ class Scene
 {
   private:
     StaticEntity staticEntities[SceneConfig::staticEntitiesSize];
-    Entity dynamicEntities[SceneConfig::staticEntitiesSize];
+    DynamicEntity dynamicEntities[SceneConfig::staticEntitiesSize];
     size_t size_staticEntities{0};
     size_t size_dynamicEntities{0};
 
   public:
     Scene(
         std::initializer_list<StaticEntity> staticEntities,
-        std::initializer_list<Entity> dynamicEntities);
+        std::initializer_list<DynamicEntity> dynamicEntities);
 
     void addStaticEntity(const StaticEntity &staticEntity);
-    void addEntity(const Entity &entity);
+    void addEntity(const DynamicEntity &entity);
 
     std::span<StaticEntity> getStaticEntities()
     {
         return std::span<StaticEntity>(staticEntities, size_staticEntities);
     }
 
-    std::span<Entity> getDynamicEntities()
+    std::span<DynamicEntity> getDynamicEntities()
     {
-        return std::span<Entity>(dynamicEntities, size_dynamicEntities);
+        return std::span<DynamicEntity>(dynamicEntities, size_dynamicEntities);
     }
 };

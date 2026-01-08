@@ -42,7 +42,7 @@ void Engine::run()
     shader.use();
     input.use();
 
-    Scene scene = worldBuilder.buildScene(&shader);
+    Scene scene = worldBuilder.buildScene(shader);
 
 
     while (!window.windowShouldClose())
@@ -62,7 +62,7 @@ void Engine::run()
         spdlog::info("begining frame rendering");
 #endif
         renderer.beginFrame();
-        renderer.submit(scene);
+        renderer.submit(scene, shader);
 
         window.swapBuffers();
         window.pollEvents();

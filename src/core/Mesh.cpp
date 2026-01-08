@@ -4,16 +4,14 @@ Mesh::Mesh()
     : VAO(0),
       VBO(0),
       EBO(0),
-      indexCount(0),
-      color(Colors::White) {}
+      indexCount(0) {}
 
 Mesh::~Mesh() { clear(); }
 
 
-void Mesh::createMesh(std::span<Vertex> vertices, std::span<GLuint> indices, const glm::vec4 &color)
+void Mesh::createMesh(std::span<Vertex> vertices, std::span<GLuint> indices)
 {
 
-    this->color = color;
     this->indexCount = static_cast<GLuint>(indices.size());
 
     glGenVertexArrays(1, &VAO);

@@ -3,8 +3,15 @@
 #include "core/MeshFactory.h"
 #include "spdlog/spdlog.h"
 
+MeshFactory::MeshFactory()
+{
+    square = buildNewSquare();
+    pyramid = buildNewPyramid();
+    cube = buildNewCube();
+}
 
-Mesh *MeshFactory::buildSquare(const glm::vec4 &color)
+
+Mesh *MeshFactory::buildNewSquare()
 {
     if (index >= MeshFactoryConfig::meshesSize)
     {
@@ -23,7 +30,7 @@ Mesh *MeshFactory::buildSquare(const glm::vec4 &color)
         0, 1, 3,
         1, 2, 3};
 
-    meshesStorage[index].createMesh(vertices, indices, color);
+    meshesStorage[index].createMesh(vertices, indices);
 
 #ifdef DEBUG
     spdlog::info("Built Square stored at index={}", index);
@@ -32,7 +39,7 @@ Mesh *MeshFactory::buildSquare(const glm::vec4 &color)
     return &meshesStorage[index++];
 }
 
-Mesh *MeshFactory::buildCube(const glm::vec4 &color)
+Mesh *MeshFactory::buildNewCube()
 {
     if (index >= MeshFactoryConfig::meshesSize)
     {
@@ -78,7 +85,7 @@ Mesh *MeshFactory::buildCube(const glm::vec4 &color)
         2, 6, 5};
 
 
-    meshesStorage[index].createMesh(vertices, indices, color);
+    meshesStorage[index].createMesh(vertices, indices);
 
 #ifdef DEBUG
     spdlog::info("Built Cube stored at index={}", index);
@@ -88,7 +95,7 @@ Mesh *MeshFactory::buildCube(const glm::vec4 &color)
 }
 
 
-Mesh *MeshFactory::buildPyramid(const glm::vec4 &color)
+Mesh *MeshFactory::buildNewPyramid()
 {
     if (index >= MeshFactoryConfig::meshesSize)
     {
@@ -114,7 +121,7 @@ Mesh *MeshFactory::buildPyramid(const glm::vec4 &color)
         2, 3, 4,
         3, 0, 4};
 
-    meshesStorage[index].createMesh(vertices, indices, color);
+    meshesStorage[index].createMesh(vertices, indices);
 
 #ifdef DEBUG
     spdlog::info("Built Pyramid stored at index={}", index);

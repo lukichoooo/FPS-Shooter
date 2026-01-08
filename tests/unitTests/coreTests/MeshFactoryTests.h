@@ -19,7 +19,7 @@ inline void MeshFactoryTests::test_buildSquare()
 {
     MeshFactory factory;
 
-    Mesh *m = factory.buildSquare({1, 0, 0, 1});
+    Mesh *m = factory.buildNewSquare();
     assertNotNull(m);
 
     assert(m->getIndexCount() == 6); // 2 triangles
@@ -29,7 +29,7 @@ inline void MeshFactoryTests::test_buildCube()
 {
     MeshFactory factory;
 
-    Mesh *m = factory.buildCube({0, 1, 0, 1});
+    Mesh *m = factory.buildNewCube();
     assertNotNull(m);
 
     assert(m->getIndexCount() == 36); // 12 triangles
@@ -40,7 +40,7 @@ inline void MeshFactoryTests::test_buildPyramid()
 {
     MeshFactory factory;
 
-    Mesh *m = factory.buildPyramid({0, 0, 1, 1});
+    Mesh *m = factory.buildNewPyramid();
     assertNotNull(m);
 
     assert(m->getIndexCount() == 18); // 6 triangles
@@ -52,14 +52,14 @@ inline void MeshFactoryTests::test_factoryOverflow()
     MeshFactory factory;
 
     Mesh *last = nullptr;
-    for (size_t i = 0; i < MeshFactoryConfig::meshesSize; ++i)
+    for (size_t i = factory.getNextIndex(); i < MeshFactoryConfig::meshesSize; ++i)
     {
-        last = factory.buildSquare({1, 1, 1, 1});
+        last = factory.buildNewSquare();
         assertNotNull(last);
     }
 
     // One too many
-    Mesh *overflow = factory.buildSquare({1, 0, 1, 1});
+    Mesh *overflow = factory.buildNewSquare();
     assertNull(overflow);
 }
 

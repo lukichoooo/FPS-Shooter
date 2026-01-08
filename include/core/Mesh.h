@@ -1,6 +1,5 @@
 #pragma once
 
-#include "config/Colors.h"
 #include "core/Dtos.h"
 #include <glm/ext/vector_float4.hpp>
 #include <span>
@@ -11,7 +10,6 @@ class Mesh
   private:
     GLuint VAO, VBO, EBO;
     GLuint indexCount;
-    glm::vec4 color{Colors::White};
 
   public:
     Mesh();
@@ -21,12 +19,9 @@ class Mesh
     int getVBO() const { return VBO; }
     int getEBO() const { return EBO; }
     int getIndexCount() const { return indexCount; }
-    const glm::vec4 &getColor() const { return color; };
 
     void bind() { glBindVertexArray(VAO); }
 
-    void setColor(glm::vec4 color) { this->color = color; };
-
     void clear();
-    void createMesh(std::span<Vertex> vertices, std::span<GLuint> indices, const glm::vec4 &color);
+    void createMesh(std::span<Vertex> vertices, std::span<GLuint> indices);
 };

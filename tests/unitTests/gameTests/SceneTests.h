@@ -1,9 +1,7 @@
 #pragma once
 
 #include <cassert>
-#include "core/Entity.h"
 #include "core/MeshFactory.h"
-#include "core/StaticEntity.h"
 #include "game/Scene.h"
 #include "unitTests/testsHelper/ShaderTestsHelper.h"
 
@@ -12,20 +10,20 @@
 inline StaticEntity _makeStaticEntity()
 {
     MeshFactory factory;
-    Mesh *mesh = factory.buildSquare({1, 1, 1, 1});
+    Mesh *mesh = factory.buildNewSquare();
     Shader shader = _makeTestShader();
     EntityConfigStruct cfg;
-    return StaticEntity(cfg, mesh, &shader);
+    return StaticEntity(cfg, mesh);
 }
 
 // Minimal dynamic entity creator
-inline Entity _makeDynamicEntity()
+inline DynamicEntity _makeDynamicEntity()
 {
     MeshFactory factory;
-    Mesh *mesh = factory.buildSquare({1, 0, 0, 1});
+    Mesh *mesh = factory.buildNewSquare();
     Shader shader = _makeTestShader();
     CharacterConfig cfg;
-    return Entity(cfg, mesh, &shader);
+    return DynamicEntity(cfg, mesh);
 }
 
 class SceneTests
@@ -35,7 +33,7 @@ class SceneTests
     {
         StaticEntity s1 = _makeStaticEntity();
         StaticEntity s2 = _makeStaticEntity();
-        Entity e1 = _makeDynamicEntity();
+        DynamicEntity e1 = _makeDynamicEntity();
 
         Scene scene({s1, s2}, {e1});
 
@@ -48,7 +46,7 @@ class SceneTests
         Scene scene({}, {});
 
         StaticEntity s = _makeStaticEntity();
-        Entity e = _makeDynamicEntity();
+        DynamicEntity e = _makeDynamicEntity();
 
         scene.addStaticEntity(s);
         scene.addEntity(e);

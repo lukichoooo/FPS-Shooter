@@ -2,7 +2,7 @@
 #include "coreTests/MeshFactoryTests.h"
 #include "testsHelper/GLTestContext.h"
 #include "spdlog/spdlog.h"
-#include "unitTests/coreTests/EntityTests.h"
+#include "unitTests/coreTests/DynamicEntityTests.h"
 #include "unitTests/coreTests/StaticEntityTests.h"
 #include "unitTests/gameTests/SceneTests.h"
 
@@ -11,7 +11,7 @@ int main()
     GLTestContext::init();
 
     // core tests
-    _entityTests();
+    _dynamicEntityTests();
     _staticEntityTests();
     _meshFactoryTests();
     _cameraTests();

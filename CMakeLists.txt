@@ -19,15 +19,18 @@ add_library(GameCore STATIC
     src/core/Input.cpp
     src/core/MeshFactory.cpp
     src/core/Mesh.cpp
-    src/core/Entity.cpp
-    src/core/StaticEntity.cpp
+
+    src/core/entities/DynamicEntity.cpp
+    src/core/entities/StaticEntity.cpp
+    src/core/entities/EntityBuilder.cpp
 
     # Game
     src/game/Engine.cpp
     src/game/Player.cpp
-    src/game/entities/Character.cpp
     src/game/WorldBuilder.cpp
     src/game/Scene.cpp
+
+    src/game/entities/Character.cpp
 
     # Graphics
     src/graphics/Renderer.cpp

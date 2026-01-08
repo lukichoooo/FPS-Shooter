@@ -1,7 +1,7 @@
 #include <game/entities/Character.h>
 
 Character::Character(const CharacterConfig &config)
-    : Entity(config, nullptr, nullptr), // TODO: add body to character
+    : DynamicEntity(config, nullptr), // TODO: add body to character
       config(config),
       height(config.height)
 {

@@ -24,7 +24,6 @@ Window::Window(const WindowConfig &config)
     int bufferWidth, bufferHeight;
     glfwGetFramebufferSize(window, &bufferWidth, &bufferHeight);
 
-    // this has to be before world buildin brah TODOOOO
     if (glewInit() != GLEW_OK)
     {
         spdlog::error("Failed to initialize GLEW");
