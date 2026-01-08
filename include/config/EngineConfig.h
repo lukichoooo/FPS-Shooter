@@ -24,6 +24,9 @@ class SceneConfig
 
 // other
 
+struct DynamicEntityAnimatorConfig
+{
+};
 
 class EntityConfigStruct
 {
@@ -55,20 +58,35 @@ class EntityConfigStruct
     }
 };
 
+
+struct CharacterAnimatorConfig
+{
+    // Vertical Movement
+    const float groundY{0.0f};
+    const float gravity{9.81f};
+    float jumpVelocity{5.0f};
+    float jumpAccelerationTime{0.2f};
+
+    // Horizontal Movement
+    float walkSpeed{3.0f};
+    float runSpeed{6.0f};
+    float accelerationTime{0.00003f};
+    float decelerationTime{0.00002f};
+};
+
+
 class CharacterConfig : public EntityConfigStruct
 {
   public:
+    CharacterAnimatorConfig animatorConfig;
     float height{1.8f};
-    float jumpStrength{1.0f};
-    float walkSpeed{3.0f};
-
-    float runSpeedMultiplier{3.5f};
 };
+
 
 struct PlayerConfig
 {
-    float speedFovMultiplier{1.4f};
     CharacterConfig characterConfig;
+    float speedFovMultiplier{1.4f};
 };
 
 
@@ -81,6 +99,7 @@ struct InputConfig
     float sensitivity{0.58f};
     bool invertY{true};
 };
+
 
 struct CameraConfig
 {

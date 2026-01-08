@@ -37,9 +37,12 @@ void Input::handleKeyInput(Player &player, const Camera &camera)
         moveDir = glm::normalize(moveDir);
 
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-        player.run(moveDir * FrameClock::getDeltaTime());
+        player.run(moveDir);
     else
-        player.walk(moveDir * FrameClock::getDeltaTime());
+        player.walk(moveDir);
+
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+        player.jump();
 
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GLFW_TRUE);

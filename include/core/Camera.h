@@ -11,7 +11,7 @@ class Camera
   private:
     CameraConfig config;
 
-    float FOV = 90.0f;
+    float FOV;
     glm::vec3 front;
     glm::vec3 up;
     int frameBufferWidth;
@@ -28,7 +28,7 @@ class Camera
         const CameraConfig &config,
         std::function<void(int &, int &)> getFrameBufferSize);
 
-    float getFOV() const { return FOV; }
+    float getFov() const { return FOV; }
     float getYaw() const { return yaw; }
     float getPitch() const { return pitch; }
     const glm::vec3 &getFront() const { return front; }
@@ -36,9 +36,10 @@ class Camera
     const glm::mat4 &getView() const { return view; }
     const glm::mat4 &getProjection() const { return projection; }
 
-    void setFOV(float value) { FOV = value; }
+    void setFov(float value) { FOV = value; }
     void setYaw(float value) { yaw = value; }
     void setPitch(float value) { pitch = value; }
+
 
     void updateView(const glm::vec3 &pos);
     void updateProjection();

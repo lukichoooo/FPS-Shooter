@@ -30,10 +30,10 @@ void Engine::run()
     shader.addFragmentShader();
     shader.linkProgram();
 
-    Camera camera(
+    Camera playerCamera(
         config.camera,
         [winPtr = &window](int &w, int &h) { winPtr->getFrameBufferSize(w, h); });
-    Player player(config.player);
+    Player player(config.player, &playerCamera);
     Input input(config.input, window.getHandle());
 
 
@@ -49,14 +49,14 @@ void Engine::run()
     {
         FrameClock::updateDeltaTime();
 
-        input.handleKeyInput(player, camera);
-        input.handleMouseSensorInput(camera);
+        input.handleKeyInput(player, playerCamera);
+        input.handleMouseSensorInput(playerCamera);
 
-        camera.updateView(player.getCameraPosition());
-        camera.updateProjection();
+        playerCamera.updateView(player.getCameraPosition());
+        playerCamera.updateProjection();
 
-        shader.setMat4f("view", camera.getView());
-        shader.setMat4f("projection", camera.getProjection());
+        shader.setMat4f("view", playerCamera.getView());
+        shader.setMat4f("projection", playerCamera.getProjection());
 
 #ifdef DEBUG
         spdlog::info("begining frame rendering");
