@@ -52,7 +52,7 @@ void Engine::run()
         input.handleKeyInput(player, camera);
         input.handleMouseSensorInput(camera);
 
-        camera.updateView(player.getCharacter().getPos());
+        camera.updateView(player.getCameraPosition());
         camera.updateProjection();
 
         shader.setMat4f("view", camera.getView());

@@ -58,9 +58,9 @@ class EntityConfigStruct
 class CharacterConfig : public EntityConfigStruct
 {
   public:
-    float height{2.0f};
+    float height{1.8f};
     float jumpStrength{1.0f};
-    float walkSpeed{5.0f};
+    float walkSpeed{3.0f};
 
     float runSpeedMultiplier{3.5f};
 };
@@ -69,11 +69,6 @@ struct PlayerConfig
 {
     float speedFovMultiplier{1.4f};
     CharacterConfig characterConfig;
-
-    PlayerConfig()
-    {
-        characterConfig.pos = {0, 5, 0};
-    }
 };
 
 
@@ -89,7 +84,7 @@ struct InputConfig
 
 struct CameraConfig
 {
-    float defaultFOV{90.0f};
+    float defaultFOV{70.0f};
     float nearPlane{0.1f};
     float farPlane{100.0f};
     glm::vec3 front{0.0f, 0.0f, -1.0f};

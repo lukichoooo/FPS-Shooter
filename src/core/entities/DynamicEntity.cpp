@@ -27,6 +27,7 @@ void DynamicEntity::draw(Shader &shader)
 
     mesh->bind();
 
+    // TODO add animations or somth
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, pos);
     model = glm::rotate(model, rotation.x, glm::vec3(1, 0, 0));

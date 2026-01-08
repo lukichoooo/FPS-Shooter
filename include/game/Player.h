@@ -19,6 +19,11 @@ class Player
 
     const Character &getCharacter() const { return character; }
 
-    void run(const glm::vec3 &movement) { character.run(movement); }
-    void walk(const glm::vec3 &movement) { character.walk(movement); }
+    glm::vec3 getCameraPosition() const
+    {
+        return character.getPos() + glm::vec3{0.0f, character.getHeight(), 0.0f};
+    }
+
+    void run(glm::vec3 movement) { character.run(movement); }
+    void walk(glm::vec3 movement) { character.walk(movement); }
 };

@@ -8,14 +8,16 @@ Character::Character(const CharacterConfig &config)
 }
 
 
-void Character::run(const glm::vec3 &movement)
+void Character::run(glm::vec3 &movement)
 {
-    Character::move(movement * config.runSpeedMultiplier);
+    movement.y = jumpYOffset;
+    Character::move(movement * config.walkSpeed * config.runSpeedMultiplier);
 }
 
-void Character::walk(const glm::vec3 &movement)
+void Character::walk(glm::vec3 &movement)
 {
-    Character::move(movement);
+    movement.y = jumpYOffset;
+    Character::move(movement * config.walkSpeed);
 }
 
 void Character::jump() // TODO

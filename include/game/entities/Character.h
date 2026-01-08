@@ -11,18 +11,19 @@ class Character : public DynamicEntity
 
     float height;
 
-    float jumpOffset{0.0f};
+    float jumpYOffset{0.0f};
 
 
   public:
     Character(const CharacterConfig &config);
 
-    float getJumpOffset() const { return jumpOffset; }
+    float getJumpYOffset() const { return jumpYOffset; }
+    float getHeight() const { return height; }
 
-    void setJumpOffset(float jumpOffset) { this->jumpOffset = jumpOffset; }
+    void setJumpYOffset(float jumpOffset) { this->jumpYOffset = jumpOffset; }
 
 
     void jump();
-    void run(const glm::vec3 &movement);
-    void walk(const glm::vec3 &movement);
+    void run(glm::vec3 &movement);
+    void walk(glm::vec3 &movement);
 };
