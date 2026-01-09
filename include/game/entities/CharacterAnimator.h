@@ -65,10 +65,12 @@ class CharacterAnimator
         updatePos(pos, inputDir, config.walkSpeed);
     }
 
-    void jump()
+    void jump(const glm::vec3 &pos)
     {
-        if (velocity.y < 0.001f)
+        if (pos.y == config.groundY)
+        {
             velocity.y = config.jumpVelocity;
-        onGround = false;
+            onGround = false;
+        }
     }
 };

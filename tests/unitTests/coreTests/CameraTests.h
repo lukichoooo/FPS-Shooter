@@ -15,6 +15,7 @@ class CameraTests
 inline void CameraTests::updateViewTest()
 {
     CameraConfig config;
+
     config.defaultFOV = 100;
     config.farPlane = 200;
     config.nearPlane = 20;
@@ -38,11 +39,11 @@ inline void CameraTests::updateViewTest()
     glm::vec3 pos = {0, 0, 0};
 
     auto expected = glm::lookAt(
-        pos, pos + front, sut.up);
+        pos, pos + front, sut.getUp());
 
     sut.updateView(pos);
 
-    assert(sut.front == front);
+    assert(sut.getFront() == front);
     assert(sut.getView() == expected);
 }
 

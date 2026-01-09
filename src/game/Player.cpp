@@ -16,7 +16,6 @@ glm::vec3 Player::getCameraPosition() const
 
 void Player::run(glm::vec3 movement)
 {
-    // camera->setFov(speedFovMultiplier * camera->getFov());
     character.run(movement);
 }
 

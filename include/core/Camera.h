@@ -6,8 +6,6 @@
 
 class Camera
 {
-    friend class CameraTests;
-
   private:
     CameraConfig config;
 
@@ -24,8 +22,7 @@ class Camera
     float pitch{};
 
   public:
-    Camera(
-        const CameraConfig &config,
+    Camera(const CameraConfig &config,
         std::function<void(int &, int &)> getFrameBufferSize);
 
     float getFov() const { return FOV; }

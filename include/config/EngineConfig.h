@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <glm/ext/vector_float3.hpp>
 #include <glm/vec4.hpp>
+#include <string>
 
 
 // static
@@ -62,8 +63,8 @@ class EntityConfigStruct
 struct CharacterAnimatorConfig
 {
     // Vertical Movement
-    const float groundY{0.0f};
-    const float gravity{9.81f};
+    float groundY{0.0f};
+    float gravity{9.81f};
     float jumpVelocity{5.0f};
     float jumpAccelerationTime{0.2f};
 
@@ -86,7 +87,6 @@ class CharacterConfig : public EntityConfigStruct
 struct PlayerConfig
 {
     CharacterConfig characterConfig;
-    float speedFovMultiplier{1.4f};
 };
 
 
@@ -100,9 +100,14 @@ struct InputConfig
     bool invertY{true};
 };
 
+struct CameraAnimatorConfig
+{
+    float speedFovMultiplier{1.4f};
+};
 
 struct CameraConfig
 {
+    CameraAnimatorConfig animatorConfig;
     float defaultFOV{70.0f};
     float nearPlane{0.1f};
     float farPlane{100.0f};
@@ -112,15 +117,15 @@ struct CameraConfig
 
 struct ShaderConfig
 {
-    const char *vertexShaderPath{"assets/shaders/vertexShader.glsl"};
-    const char *fragmentShaderPath{"assets/shaders/fragmentShader.glsl"};
+    std::string vertexShaderPath{"assets/shaders/vertexShader.glsl"};
+    std::string fragmentShaderPath{"assets/shaders/fragmentShader.glsl"};
 };
 
 struct WindowConfig
 {
     int width{1280};
     int height{720};
-    const char *title{"FPS Shooter"};
+    std::string title{"FPS Shooter"};
     bool vsync{true};
 };
 

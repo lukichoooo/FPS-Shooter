@@ -11,7 +11,7 @@ Window::Window(const WindowConfig &config)
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(config.width, config.height, config.title, NULL, NULL);
+    window = glfwCreateWindow(config.width, config.height, config.title.c_str(), NULL, NULL);
     if (!window)
     {
         spdlog::error("Failed to create GLFW window: {}x{}", config.width, config.height);

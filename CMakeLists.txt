@@ -98,4 +98,15 @@ add_custom_target(copy_shaders ALL
     COMMENT "Updating shaders"
 )
 
+add_custom_target(copy_configs ALL
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+        ${CMAKE_BINARY_DIR}/assets/config
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/assets/config
+        ${CMAKE_BINARY_DIR}/assets/config
+    COMMENT "Updating shaders"
+)
+
+
+
 

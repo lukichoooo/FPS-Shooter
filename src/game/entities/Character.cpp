@@ -19,5 +19,5 @@ void Character::walk(glm::vec3 &movement)
 
 void Character::jump()
 {
-    animator.jump();
+    animator.jump(pos);
 }
