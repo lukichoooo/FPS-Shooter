@@ -6,15 +6,10 @@ void FlyingTargetAnimator::updatePos(glm::vec3 &pos)
 {
     float dt = FrameClock::getDeltaTime();
 
-    // Increment orbit and spin angles
     orbitAngle += config.orbitSpeed * dt;
-    spinAngle += config.spinSpeed * dt;
-
-    // Compute new position based on orbit
     pos.x = config.orbitCenter.x + std::cos(orbitAngle) * config.orbitRadius;
     pos.z = config.orbitCenter.z + std::sin(orbitAngle) * config.orbitRadius;
 
-    // Consider vertical movement
     considerIfDropping(pos);
 }
 
@@ -65,17 +60,19 @@ void FlyingTargetAnimator::updatePosDirected(glm::vec3 &pos, const glm::vec3 &in
 
 void FlyingTargetAnimator::considerIfDropping(glm::vec3 &pos)
 {
-    if (dropping)
+    if (!dropping)
+        return;
+
+    float dt = FrameClock::getDeltaTime();
+
+    velocity.y -= config.gravity * dt;
+
+    pos.y += velocity.y * dt;
+
+    if (pos.y <= config.groundY)
     {
-        if (pos.y <= config.groundY)
-        {
-            pos.y = config.groundY;
-            velocity.y = 0;
-            dropping = false;
-        }
-        else
-        {
-            velocity.y -= config.gravity * FrameClock::getDeltaTime();
-        }
+        pos.y = config.groundY;
+        velocity.y = 0;
+        dropping = false;
     }
 }

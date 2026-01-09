@@ -14,7 +14,7 @@ struct EntityConfigs
 
     // ---------- GROUND ----------
     inline static const EntityConfigStruct Ground{
-        .pos = {0.0f, 0.0f, 0.0f},
+        .pos = {-25.0f, 0.0f, -25.0f},
         .rotation = {0.0f, 0.0f, 0.0f},
         .scale = {50.0f, 1.0f, 50.0f},
         .color = Colors::Default,
@@ -60,5 +60,85 @@ struct EntityConfigs
 
     inline static const EntityConfigStruct RotateFront{
         .rotation = {0.0f, 0.0f, 0.0f},
+    };
+
+    // ---------- PLACEMENT PRESETS (units) ----------
+    inline static const EntityConfigStruct PlaceCenter{
+        .pos = {0.0f, 0.0f, 0.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceForward{
+        .pos = {0.0f, 0.0f, -20.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceBack{
+        .pos = {0.0f, 0.0f, 20.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceLeft{
+        .pos = {-20.0f, 0.0f, 0.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceRight{
+        .pos = {20.0f, 0.0f, 0.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceForwardLeft{
+        .pos = {-20.0f, 0.0f, -20.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceForwardRight{
+        .pos = {20.0f, 0.0f, -20.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceBackLeft{
+        .pos = {-20.0f, 0.0f, 20.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceBackRight{
+        .pos = {20.0f, 0.0f, 20.0f},
+    };
+
+
+    // ---------- AIR / VERTICAL PLACEMENT PRESETS ----------
+    inline static const EntityConfigStruct PlaceSlightlyAbove{
+        .pos = {0.0f, 5.0f, 0.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceAbove{
+        .pos = {0.0f, 10.0f, 0.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceHighAbove{
+        .pos = {0.0f, 20.0f, 0.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceSlightlyBelow{
+        .pos = {0.0f, -5.0f, 0.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceBelow{
+        .pos = {0.0f, -10.0f, 0.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceDeepBelow{
+        .pos = {0.0f, -20.0f, 0.0f},
+    };
+
+    // ---------- COMBINED AIR + HORIZONTAL ----------
+    inline static const EntityConfigStruct PlaceAboveForward{
+        .pos = {0.0f, 10.0f, -10.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceAboveBack{
+        .pos = {0.0f, 10.0f, 10.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceAboveLeft{
+        .pos = {-10.0f, 10.0f, 0.0f},
+    };
+
+    inline static const EntityConfigStruct PlaceAboveRight{
+        .pos = {10.0f, 10.0f, 0.0f},
     };
 };

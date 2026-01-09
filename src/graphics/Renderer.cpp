@@ -1,5 +1,6 @@
 #include "graphics/Renderer.h"
 #include "config/EngineConfig.h"
+#include "game/entities/PyramidTarget.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -29,6 +30,6 @@ void Renderer::submit(Scene &scene, Shader &shader)
     for (auto &e : scene.getStaticEntities())
         e.draw(shader);
 
-    for (auto &e : scene.getPyramidTargets())
+    for (PyramidTarget &e : scene.getPyramidTargets())
         e.draw(shader);
 };

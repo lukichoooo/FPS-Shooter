@@ -25,10 +25,10 @@ void Scene::addDynamic(const DynamicEntity &entity)
 
 void Scene::addPyramidTarget(const PyramidTarget &entity)
 {
-    if (index_dynamics >= dynamics.size())
+    if (index_pyramidTargets >= pyramidTargets.size())
     {
-        spdlog::error("dynamic entities array full, size={}", index_dynamics);
+        spdlog::error("pyramidTargets entities array full, size={}", index_dynamics);
         return;
     }
-    this->dynamics[index_dynamics++] = entity;
+    this->pyramidTargets[index_pyramidTargets++] = entity;
 }

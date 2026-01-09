@@ -191,36 +191,6 @@ inline void from_json(const json &j, PlayerConfig &c)
     j.at("characterConfig").get_to(c.characterConfig);
 }
 
-// JSON serialization
-inline void to_json(nlohmann::json &j, const FlyingTargetAnimatorConfig &c)
-{
-    j = {
-        {"gravity", c.gravity},
-        {"groundY", c.groundY},
-        {"flySpeed", c.flySpeed},
-        {"boostSpeed", c.boostSpeed},
-        {"accelerationTime", c.accelerationTime},
-        {"decelerationTime", c.decelerationTime},
-        {"orbitRadius", c.orbitRadius},
-        {"orbitCenter", c.orbitCenter},
-        {"orbitSpeed", c.orbitSpeed},
-        {"spinSpeed", c.spinSpeed}};
-}
-
-inline void from_json(const nlohmann::json &j, FlyingTargetAnimatorConfig &c)
-{
-    j.at("gravity").get_to(c.gravity);
-    j.at("groundY").get_to(c.groundY);
-    j.at("flySpeed").get_to(c.flySpeed);
-    j.at("boostSpeed").get_to(c.boostSpeed);
-    j.at("accelerationTime").get_to(c.accelerationTime);
-    j.at("decelerationTime").get_to(c.decelerationTime);
-    j.at("orbitRadius").get_to(c.orbitRadius);
-    j.at("orbitCenter").get_to(c.orbitCenter);
-    j.at("orbitSpeed").get_to(c.orbitSpeed);
-    j.at("spinSpeed").get_to(c.spinSpeed);
-}
-
 
 // EntityCOnfigStruct
 inline void to_json(json &j, const EntityConfigStruct &c)
@@ -240,6 +210,37 @@ inline void from_json(const json &j, EntityConfigStruct &c)
     j.at("scale").get_to(c.scale);
     j.at("color").get_to(c.color);
 }
+
+
+// FlyingTargetANimator
+inline void to_json(nlohmann::json &j, const FlyingTargetAnimatorConfig &c)
+{
+    j = {
+        {"gravity", c.gravity},
+        {"groundY", c.groundY},
+        {"flySpeed", c.flySpeed},
+        {"boostSpeed", c.boostSpeed},
+        {"accelerationTime", c.accelerationTime},
+        {"decelerationTime", c.decelerationTime},
+        {"orbitRadius", c.orbitRadius},
+        {"orbitCenter", c.orbitCenter},
+        {"orbitSpeed", c.orbitSpeed},
+    };
+}
+
+inline void from_json(const nlohmann::json &j, FlyingTargetAnimatorConfig &c)
+{
+    j.at("gravity").get_to(c.gravity);
+    j.at("groundY").get_to(c.groundY);
+    j.at("flySpeed").get_to(c.flySpeed);
+    j.at("boostSpeed").get_to(c.boostSpeed);
+    j.at("accelerationTime").get_to(c.accelerationTime);
+    j.at("decelerationTime").get_to(c.decelerationTime);
+    j.at("orbitRadius").get_to(c.orbitRadius);
+    j.at("orbitCenter").get_to(c.orbitCenter);
+    j.at("orbitSpeed").get_to(c.orbitSpeed);
+}
+
 
 // FlyingTargetConfig
 inline void to_json(json &j, const FlyingTargetConfig &c)

@@ -6,9 +6,12 @@
 
 Scene WorldBuilder::buildScene()
 {
+    auto flyingPyramidConfig = config.flyingTarget;
+    flyingPyramidConfig = EntityConfigs::PlaceHighAbove + Colors::Crimson;
+
     return SceneBuilder()
         .addStatic(entityBuilder.getTerrain())
         .addDynamic(entityBuilder.getCube(EntityConfigs::Bigger + Colors::Crimson))
-        .addPyramidTarget(entityBuilder.getPyramidTarget(config.flyingTarget))
+        .addPyramidTarget(entityBuilder.getPyramidTarget(flyingPyramidConfig))
         .build();
 }

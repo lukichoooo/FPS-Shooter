@@ -10,15 +10,13 @@
 // static
 
 
-class MeshFactoryStorageConfig
+struct MeshFactoryStorageConfig
 {
-  public:
     static constexpr size_t meshesSize = 16;
 };
 
-class SceneStorageConfig
+struct SceneStorageConfig
 {
-  public:
     static constexpr size_t staticEntitiesSize = 16;
     static constexpr size_t dynamicEntitiesSize = 16;
     static constexpr size_t pyramidTargetsSize = 16;
@@ -26,9 +24,8 @@ class SceneStorageConfig
 
 // other
 
-class EntityConfigStruct
+struct EntityConfigStruct
 {
-  public:
     glm::vec3 pos{0.0f, 0.0f, 0.0f};
     glm::vec3 rotation{0.0f, 0.0f, 0.0f};
     glm::vec3 scale{1.0f, 1.0f, 1.0f};
@@ -68,9 +65,8 @@ struct FlyingTargetAnimatorConfig
 
     // map placement
     float orbitRadius{5.0f};
-    glm::vec3 orbitCenter{10.0f, 0.0f, 0.0f};
-    float orbitSpeed = 19.0f;
-    float spinSpeed = 30.0f;
+    glm::vec3 orbitCenter{10.0f, 4.0f, 0.0f};
+    float orbitSpeed = 3.0f;
 };
 
 
@@ -90,9 +86,8 @@ struct CharacterAnimatorConfig
 };
 
 
-class CharacterConfig : public EntityConfigStruct
+struct CharacterConfig : public EntityConfigStruct
 {
-  public:
     CharacterAnimatorConfig animatorConfig;
     float height{1.8f};
 };
@@ -103,10 +98,21 @@ struct PlayerConfig
     CharacterConfig characterConfig;
 };
 
-class FlyingTargetConfig : public EntityConfigStruct
+struct FlyingTargetConfig : public EntityConfigStruct
 {
-  public:
     FlyingTargetAnimatorConfig animatorConfig;
+
+    FlyingTargetConfig operator=(const EntityConfigStruct &o) const
+    {
+        return FlyingTargetConfig(o, this->animatorConfig);
+    }
+
+    FlyingTargetConfig operator+(const glm::vec4 &newColor) const
+    {
+        return FlyingTargetConfig(
+            EntityConfigStruct::operator+(newColor),
+            this->animatorConfig);
+    }
 };
 
 

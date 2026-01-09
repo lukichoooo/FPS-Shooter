@@ -1,3 +1,5 @@
+// #define DEBUG_POSITIOIN
+
 #include "game/entities/PyramidTarget.h"
 #include "config/EngineConfig.h"
 #include "core/entities/DynamicEntity.h"
@@ -43,7 +45,16 @@ void PyramidTarget::draw(Shader &shader)
 {
     mesh->bind();
 
+#ifdef DEBUG_POSITIOIN
+    spdlog::info("PyramidTarget Before Animatoin pos=({},{},{})", pos.x, pos.y, pos.z);
+#endif
+
     animator.updatePos(pos);
+
+#ifdef DEBUG_POSITIOIN
+    spdlog::info("PyramidTarget After Animation pos=({},{},{})", pos.x, pos.y, pos.z);
+#endif
+
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, pos);
     model = glm::rotate(model, rotation.x, glm::vec3(1, 0, 0));

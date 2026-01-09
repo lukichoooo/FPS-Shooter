@@ -10,7 +10,7 @@ class FlyingTargetAnimator
 
     glm::vec3 velocity{};
     bool dropping{false};
-    float spinAngle{};
+
     float orbitAngle{};
 
     void updatePosDirected(glm::vec3 &pos, const glm::vec3 &inputDir, float speed);
