@@ -1,22 +1,14 @@
 
 #include "game/WorldBuilder.h"
-#include "config/Colors.h"
 #include "config/EntityConfigs.h"
+#include "core/scene/SceneBuilder.h"
 
 
-Scene WorldBuilder::buildScene([[maybe_unused]] Shader &shader)
+Scene WorldBuilder::buildScene()
 {
-
-
-    return Scene(
-        {
-            // static entities
-
-            entityBuilder.getTerrain(),
-        },
-        {
-            // dynamic entities
-
-            entityBuilder.getPyramid(EntityConfigs::Small + Colors::BrightRed),
-        });
+    return SceneBuilder()
+        .addStatic(entityBuilder.getTerrain())
+        .addDynamic(entityBuilder.getCube(EntityConfigs::Bigger + Colors::Crimson))
+        .addPyramidTarget(entityBuilder.getPyramidTarget(config.flyingTarget))
+        .build();
 }

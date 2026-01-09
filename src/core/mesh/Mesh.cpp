@@ -1,4 +1,4 @@
-#include "core/Mesh.h"
+#include "core/mesh/Mesh.h"
 
 Mesh::Mesh()
     : VAO(0),

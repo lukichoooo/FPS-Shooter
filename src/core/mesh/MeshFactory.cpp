@@ -1,6 +1,5 @@
-// #define DEBUG
 
-#include "core/MeshFactory.h"
+#include "core/mesh/MeshFactory.h"
 #include "spdlog/spdlog.h"
 
 MeshFactory::MeshFactory()
@@ -13,7 +12,7 @@ MeshFactory::MeshFactory()
 
 Mesh *MeshFactory::buildNewSquare()
 {
-    if (index >= MeshFactoryConfig::meshesSize)
+    if (index >= MeshFactoryStorageConfig::meshesSize)
     {
         spdlog::error("MeshFactory storage full!");
         return nullptr;
@@ -32,7 +31,7 @@ Mesh *MeshFactory::buildNewSquare()
 
     meshesStorage[index].createMesh(vertices, indices);
 
-#ifdef DEBUG
+#ifdef DEBUG_MESH_FACTORY
     spdlog::info("Built Square stored at index={}", index);
 #endif
 
@@ -41,7 +40,7 @@ Mesh *MeshFactory::buildNewSquare()
 
 Mesh *MeshFactory::buildNewCube()
 {
-    if (index >= MeshFactoryConfig::meshesSize)
+    if (index >= MeshFactoryStorageConfig::meshesSize)
     {
         spdlog::error("MeshFactory storage full!");
         return nullptr;
@@ -87,7 +86,7 @@ Mesh *MeshFactory::buildNewCube()
 
     meshesStorage[index].createMesh(vertices, indices);
 
-#ifdef DEBUG
+#ifdef DEBUG_MESH_FACTORY
     spdlog::info("Built Cube stored at index={}", index);
 #endif
 
@@ -97,7 +96,7 @@ Mesh *MeshFactory::buildNewCube()
 
 Mesh *MeshFactory::buildNewPyramid()
 {
-    if (index >= MeshFactoryConfig::meshesSize)
+    if (index >= MeshFactoryStorageConfig::meshesSize)
     {
         spdlog::error("MeshFactory storage full!");
         return nullptr;
@@ -123,7 +122,7 @@ Mesh *MeshFactory::buildNewPyramid()
 
     meshesStorage[index].createMesh(vertices, indices);
 
-#ifdef DEBUG
+#ifdef DEBUG_MESH_FACTORY
     spdlog::info("Built Pyramid stored at index={}", index);
 #endif
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "core/Scene.h"
+#include "core/scene/Scene.h"
 #include <glm/mat4x4.hpp>
 
 class Renderer

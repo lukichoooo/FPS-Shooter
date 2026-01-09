@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "core/Mesh.h"
+#include "core/mesh/Mesh.h"
 #include "graphics/Shader.h"
 
 class DynamicEntity
@@ -34,5 +34,5 @@ class DynamicEntity
     void setColor(glm::vec4 color) { this->color = color; };
 
 
-    void draw(Shader &shader);
+    virtual void draw(Shader &shader);
 };

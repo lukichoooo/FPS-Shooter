@@ -23,13 +23,12 @@ void Renderer::beginFrame() const
 
 void Renderer::submit(Scene &scene, Shader &shader)
 {
-    for (auto &entity : scene.getDynamicEntities())
-    {
-        entity.draw(shader);
-    }
+    for (auto &e : scene.getDynamicEntities())
+        e.draw(shader);
 
-    for (auto &staticEntity : scene.getStaticEntities())
-    {
-        staticEntity.draw(shader);
-    }
+    for (auto &e : scene.getStaticEntities())
+        e.draw(shader);
+
+    for (auto &e : scene.getPyramidTargets())
+        e.draw(shader);
 };

@@ -1,8 +1,6 @@
-// #define DEBUG
-
 #include "game/Engine.h"
 #include "config/EngineConfig.h"
-#include "core/Scene.h"
+#include "core/scene/Scene.h"
 #include "game/WorldBuilder.h"
 #include "graphics/Renderer.h"
 #include "core/Camera.h"
@@ -20,7 +18,7 @@ Engine::Engine(const EngineConfig &config)
     : config(config),
       window(config.window),
       renderer(config.render),
-      worldBuilder() {}
+      worldBuilder(config.worldBuilder) {}
 
 
 void Engine::run()
@@ -42,7 +40,7 @@ void Engine::run()
     shader.use();
     input.use();
 
-    Scene scene = worldBuilder.buildScene(shader);
+    Scene scene = worldBuilder.buildScene();
 
 
     while (!window.windowShouldClose())
@@ -58,7 +56,7 @@ void Engine::run()
         shader.setMat4f("view", playerCamera.getView());
         shader.setMat4f("projection", playerCamera.getProjection());
 
-#ifdef DEBUG
+#ifdef DEBUG_ENGINE
         spdlog::info("begining frame rendering");
 #endif
         renderer.beginFrame();
@@ -66,7 +64,7 @@ void Engine::run()
 
         window.swapBuffers();
         window.pollEvents();
-#ifdef DEBUG
+#ifdef DEBUG_ENGINE
         spdlog::info("succesfully rendered frame");
 #endif
     }

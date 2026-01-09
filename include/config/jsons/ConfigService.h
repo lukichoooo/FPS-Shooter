@@ -180,10 +180,93 @@ inline void from_json(const json &j, CharacterConfig &c)
 }
 
 // PlayerConfig
-inline void to_json(json &j, const PlayerConfig &c) { j = {{"characterConfig", c.characterConfig}}; }
+inline void to_json(json &j, const PlayerConfig &c)
+{
+    j = {
+        {"characterConfig", c.characterConfig},
+    };
+}
 inline void from_json(const json &j, PlayerConfig &c)
 {
     j.at("characterConfig").get_to(c.characterConfig);
+}
+
+// JSON serialization
+inline void to_json(nlohmann::json &j, const FlyingTargetAnimatorConfig &c)
+{
+    j = {
+        {"gravity", c.gravity},
+        {"groundY", c.groundY},
+        {"flySpeed", c.flySpeed},
+        {"boostSpeed", c.boostSpeed},
+        {"accelerationTime", c.accelerationTime},
+        {"decelerationTime", c.decelerationTime},
+        {"orbitRadius", c.orbitRadius},
+        {"orbitCenter", c.orbitCenter},
+        {"orbitSpeed", c.orbitSpeed},
+        {"spinSpeed", c.spinSpeed}};
+}
+
+inline void from_json(const nlohmann::json &j, FlyingTargetAnimatorConfig &c)
+{
+    j.at("gravity").get_to(c.gravity);
+    j.at("groundY").get_to(c.groundY);
+    j.at("flySpeed").get_to(c.flySpeed);
+    j.at("boostSpeed").get_to(c.boostSpeed);
+    j.at("accelerationTime").get_to(c.accelerationTime);
+    j.at("decelerationTime").get_to(c.decelerationTime);
+    j.at("orbitRadius").get_to(c.orbitRadius);
+    j.at("orbitCenter").get_to(c.orbitCenter);
+    j.at("orbitSpeed").get_to(c.orbitSpeed);
+    j.at("spinSpeed").get_to(c.spinSpeed);
+}
+
+
+// EntityCOnfigStruct
+inline void to_json(json &j, const EntityConfigStruct &c)
+{
+    j = {
+        {"pos", c.pos},
+        {"rotation", c.rotation},
+        {"scale", c.scale},
+        {"color", c.color},
+    };
+}
+
+inline void from_json(const json &j, EntityConfigStruct &c)
+{
+    j.at("pos").get_to(c.pos);
+    j.at("rotation").get_to(c.rotation);
+    j.at("scale").get_to(c.scale);
+    j.at("color").get_to(c.color);
+}
+
+// FlyingTargetConfig
+inline void to_json(json &j, const FlyingTargetConfig &c)
+{
+    j = {
+        {"animatorConfig", c.animatorConfig},
+    };
+}
+inline void from_json(const json &j, FlyingTargetConfig &c)
+{
+    j.at("animatorConfig").get_to(c.animatorConfig);
+}
+
+// WorldBuilderConfig
+inline void to_json(json &j, const WorldBuilderConfig &c)
+{
+    j = {
+        {"character", c.character},
+        {"flyingTarget", c.flyingTarget},
+        {"entity", c.entity},
+    };
+}
+inline void from_json(const json &j, WorldBuilderConfig &c)
+{
+    j.at("character").get_to(c.character);
+    j.at("flyingTarget").get_to(c.flyingTarget);
+    j.at("entity").get_to(c.entity);
 }
 
 // EngineConfig
@@ -196,8 +279,9 @@ inline void to_json(json &j, const EngineConfig &c)
         {"window", c.window},
         {"render", c.render},
         {"shader", c.shader},
-    };
+        {"worldBuilder", c.worldBuilder}};
 }
+
 inline void from_json(const json &j, EngineConfig &c)
 {
     j.at("player").get_to(c.player);
@@ -206,16 +290,18 @@ inline void from_json(const json &j, EngineConfig &c)
     j.at("window").get_to(c.window);
     j.at("render").get_to(c.render);
     j.at("shader").get_to(c.shader);
+    j.at("worldBuilder").get_to(c.worldBuilder);
 }
+
 
 // ------------------- ConfigService -------------------
 class ConfigService
 {
     const std::string path = "assets/config/EngineConfigs.json";
+    EngineConfig config;
+    bool configLoaded{false};
 
   public:
-    EngineConfig config;
-
     ConfigService() = default;
 
     EngineConfig load()
@@ -260,5 +346,15 @@ class ConfigService
             spdlog::error("[ConfigService] Failed to save config: ", e.what());
             std::abort();
         }
+    }
+
+    const EngineConfig &getStored() const
+    {
+        if (!configLoaded)
+        {
+            spdlog::error("[ConfigService] configureaton not loaded");
+            std::abort();
+        }
+        return config;
     }
 };

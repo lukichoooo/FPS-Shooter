@@ -7,7 +7,7 @@
 class Camera //  TODO: add CameraAnimator
 {
   private:
-    CameraConfig config;
+    const CameraConfig &config;
 
     float FOV;
     glm::vec3 front;
@@ -22,8 +22,7 @@ class Camera //  TODO: add CameraAnimator
     float pitch{};
 
   public:
-    Camera(const CameraConfig &config,
-        std::function<void(int &, int &)> getFrameBufferSize);
+    Camera(const CameraConfig &config, std::function<void(int &, int &)> getFrameBufferSize);
 
     float getFov() const { return FOV; }
     float getYaw() const { return yaw; }

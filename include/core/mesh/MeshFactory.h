@@ -1,13 +1,13 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "core/Mesh.h"
+#include "core/mesh/Mesh.h"
 
 // @brief stores all meshes on stack
 class MeshFactory
 {
   private:
-    Mesh meshesStorage[MeshFactoryConfig::meshesSize];
+    Mesh meshesStorage[MeshFactoryStorageConfig::meshesSize];
     size_t index{};
 
     Mesh *square;

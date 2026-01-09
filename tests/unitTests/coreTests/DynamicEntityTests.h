@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "core/MeshFactory.h"
+#include "core/mesh/MeshFactory.h"
 #include "core/entities/DynamicEntity.h"
 #include "graphics/Shader.h"
 #include "unitTests/testsHelper/ShaderTestsHelper.h"

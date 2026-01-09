@@ -1,5 +1,3 @@
-// #define DEBUG
-
 #include "core/entities/DynamicEntity.h"
 #include "spdlog/spdlog.h"
 #include <glm/ext/matrix_transform.hpp>
@@ -7,6 +5,7 @@
 DynamicEntity::DynamicEntity()
     : config(),
       mesh(nullptr) {}
+
 
 DynamicEntity::DynamicEntity(const EntityConfigStruct &config, Mesh *mesh)
     : config(config),
@@ -41,7 +40,7 @@ void DynamicEntity::draw(Shader &shader)
 
     glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
 
-#ifdef DEBUG
+#ifdef DEBUG_ENTITIES
     spdlog::info("Finished Drawing Entity");
 #endif
 }

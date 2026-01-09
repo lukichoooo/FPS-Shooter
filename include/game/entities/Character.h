@@ -19,7 +19,6 @@ class Character : public DynamicEntity
 
     float getHeight() const { return height; }
 
-
     void run(glm::vec3 &movement);
     void walk(glm::vec3 &movement);
     void jump();

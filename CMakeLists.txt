@@ -17,13 +17,16 @@ add_library(GameCore STATIC
     src/core/Window.cpp
     src/core/Camera.cpp
     src/core/Input.cpp
-    src/core/MeshFactory.cpp
-    src/core/Mesh.cpp
-    src/core/Scene.cpp
 
     src/core/entities/DynamicEntity.cpp
     src/core/entities/StaticEntity.cpp
     src/core/entities/EntityBuilder.cpp
+
+    src/core/mesh/Mesh.cpp
+    src/core/mesh/MeshFactory.cpp
+
+    src/core/scene/Scene.cpp
+    src/core/scene/SceneBuilder.cpp
 
     # Game
     src/game/Engine.cpp
@@ -31,6 +34,7 @@ add_library(GameCore STATIC
     src/game/WorldBuilder.cpp
 
     src/game/entities/Character.cpp
+    src/game/entities/PyramidTarget.cpp
 
     src/game/animation/CharacterAnimator.cpp
     src/game/animation/FlyingTargetAnimator.cpp
@@ -109,7 +113,5 @@ add_custom_target(copy_configs ALL
         ${CMAKE_BINARY_DIR}/assets/config
     COMMENT "Updating shaders"
 )
-
-
 
 

@@ -1,8 +1,9 @@
 #pragma once
 
-#include "core/MeshFactory.h"
+#include "core/mesh/MeshFactory.h"
 #include "core/entities/DynamicEntity.h"
 #include "core/entities/StaticEntity.h"
+#include "game/entities/PyramidTarget.h"
 
 class EntityBuilder
 {
@@ -10,16 +11,15 @@ class EntityBuilder
     MeshFactory meshFactory;
 
   public:
-    EntityBuilder();
-
     // primitives
     DynamicEntity getCube(const EntityConfigStruct &config);
     DynamicEntity getPyramid(const EntityConfigStruct &config);
     DynamicEntity getSquare(const EntityConfigStruct &config);
 
     // objects
-    std::span<DynamicEntity> getPistol();
-    std::span<StaticEntity> getHouse();
+    PyramidTarget getPyramidTarget(const FlyingTargetConfig &config);
+    // getPistol();
+    // getHouse();
 
     // pre-configured
     StaticEntity getTerrain();

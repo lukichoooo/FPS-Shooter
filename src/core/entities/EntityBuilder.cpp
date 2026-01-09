@@ -4,8 +4,6 @@
 #include "config/EntityConfigs.h"
 #include "core/entities/StaticEntity.h"
 
-EntityBuilder::EntityBuilder() {}
-
 // primitives
 DynamicEntity EntityBuilder::getCube(const EntityConfigStruct &config)
 {
@@ -23,8 +21,12 @@ DynamicEntity EntityBuilder::getSquare(const EntityConfigStruct &config)
 }
 
 // objects
-std::span<DynamicEntity> getPistol();
-std::span<StaticEntity> getHouse();
+
+PyramidTarget EntityBuilder::getPyramidTarget(const FlyingTargetConfig &config)
+{
+    return {config, meshFactory.getPyramid()};
+}
+
 
 // pre-configured
 

@@ -1,12 +1,16 @@
 #pragma once
 
+#include "config/EngineConfig.h"
 #include "core/entities/EntityBuilder.h"
-#include "core/Scene.h"
+#include "core/scene/Scene.h"
 
 class WorldBuilder
 {
+    const WorldBuilderConfig &config;
     EntityBuilder entityBuilder;
 
   public:
-    Scene buildScene(Shader &shader);
+    WorldBuilder(const WorldBuilderConfig &config) : config(config) {}
+
+    Scene buildScene();
 };

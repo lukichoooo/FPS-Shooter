@@ -1,3 +1,9 @@
+// #define DEBUG_ENTITIES
+// #define DEBUG_CAMERA
+// #define DEBUG_ENGINE
+// #define DEBUG_MESH_FACTORY
+
+
 #include "config/jsons/ConfigService.h"
 #include "game/Engine.h"
 #include "spdlog/spdlog.h"
@@ -13,7 +19,7 @@ int main()
     }
 
     ConfigService configService;
-    // configService.saveDefaults();
+    configService.saveDefaults();
     EngineConfig config = configService.load();
 
     Engine engine(config);

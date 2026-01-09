@@ -10,24 +10,21 @@
 // static
 
 
-class MeshFactoryConfig
+class MeshFactoryStorageConfig
 {
   public:
     static constexpr size_t meshesSize = 16;
 };
 
-class SceneConfig
+class SceneStorageConfig
 {
   public:
     static constexpr size_t staticEntitiesSize = 16;
     static constexpr size_t dynamicEntitiesSize = 16;
+    static constexpr size_t pyramidTargetsSize = 16;
 };
 
 // other
-
-struct DynamicEntityAnimatorConfig
-{
-};
 
 class EntityConfigStruct
 {
@@ -68,6 +65,12 @@ struct FlyingTargetAnimatorConfig
     float boostSpeed{10.0f};
     float accelerationTime{0.00001f};
     float decelerationTime{0.000005f};
+
+    // map placement
+    float orbitRadius{5.0f};
+    glm::vec3 orbitCenter{10.0f, 0.0f, 0.0f};
+    float orbitSpeed = 19.0f;
+    float spinSpeed = 30.0f;
 };
 
 
@@ -98,6 +101,12 @@ class CharacterConfig : public EntityConfigStruct
 struct PlayerConfig
 {
     CharacterConfig characterConfig;
+};
+
+class FlyingTargetConfig : public EntityConfigStruct
+{
+  public:
+    FlyingTargetAnimatorConfig animatorConfig;
 };
 
 
@@ -146,6 +155,12 @@ struct RenderConfig
     bool enableDepthTest{true};
 };
 
+struct WorldBuilderConfig
+{
+    CharacterConfig character;
+    FlyingTargetConfig flyingTarget;
+    EntityConfigStruct entity;
+};
 
 // big
 
@@ -158,4 +173,5 @@ struct EngineConfig
     WindowConfig window;
     RenderConfig render;
     ShaderConfig shader;
+    WorldBuilderConfig worldBuilder;
 };

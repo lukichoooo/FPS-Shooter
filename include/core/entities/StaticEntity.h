@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "core/Mesh.h"
+#include "core/mesh/Mesh.h"
 #include "graphics/Shader.h"
 #include <glm/ext/matrix_transform.hpp>
 

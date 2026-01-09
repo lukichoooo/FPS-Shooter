@@ -1,5 +1,4 @@
-#define DEBUG
-#include "spdlog/spdlog.h"
+// #include "spdlog/spdlog.h"
 
 
 #include "core/Camera.h"
@@ -29,7 +28,7 @@ void Camera::updateView(const glm::vec3 &pos)
     direction.z = glm::cos(glm::radians(pitch)) * glm::sin(glm::radians(yaw));
     front = glm::normalize(direction);
 
-#ifdef DEBUG
+#ifdef DEBUG_CAMERA
     spdlog::info("Camera front=({},{},{}), pos=({},{},{})",
         front.x, front.y, front.z, pos.x, pos.y, pos.z);
 #endif
@@ -40,7 +39,7 @@ void Camera::updateView(const glm::vec3 &pos)
 
 void Camera::updateProjection()
 {
-#ifdef DEBUG
+#ifdef DEBUG_CAMERA
     spdlog::info("Camera Frame buffer w={},h={},Fov={}", frameBufferWidth, frameBufferHeight, FOV);
 #endif
 

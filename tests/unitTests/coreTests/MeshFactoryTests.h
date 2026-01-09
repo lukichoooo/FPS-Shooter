@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/MeshFactory.h"
+#include "core/mesh/MeshFactory.h"
 
 class MeshFactoryTests
 {
@@ -52,7 +52,7 @@ inline void MeshFactoryTests::test_factoryOverflow()
     MeshFactory factory;
 
     Mesh *last = nullptr;
-    for (size_t i = factory.getNextIndex(); i < MeshFactoryConfig::meshesSize; ++i)
+    for (size_t i = factory.getNextIndex(); i < MeshFactoryStorageConfig::meshesSize; ++i)
     {
         last = factory.buildNewSquare();
         assertNotNull(last);

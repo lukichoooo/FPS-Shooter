@@ -1,7 +1,6 @@
 #pragma once
 
 #include "config/EngineConfig.h"
-#include "graphics/FrameClock.h"
 #include <glm/geometric.hpp>
 
 class FlyingTargetAnimator
@@ -10,15 +9,22 @@ class FlyingTargetAnimator
     FlyingTargetAnimatorConfig config;
 
     glm::vec3 velocity{};
-    bool onGround{true};
+    bool dropping{false};
+    float spinAngle{};
+    float orbitAngle{};
 
-    void updatePos(glm::vec3 &pos, const glm::vec3 &inputDir, float speed);
+    void updatePosDirected(glm::vec3 &pos, const glm::vec3 &inputDir, float speed);
+    void considerIfDropping(glm::vec3 &pos);
 
   public:
+    FlyingTargetAnimator() {}
     FlyingTargetAnimator(const FlyingTargetAnimatorConfig &config) : config(config) {}
 
 
-    void updatePosBoost(glm::vec3 &pos, const glm::vec3 &inputDir);
-    void updatePosFly(glm::vec3 &pos, const glm::vec3 &inputDir);
-    void drop(const glm::vec3 &pos);
+    void updatePosDirectedBoost(glm::vec3 &pos, const glm::vec3 &inputDir);
+    void updatePosDirectedFly(glm::vec3 &pos, const glm::vec3 &inputDir);
+
+    void updatePos(glm::vec3 &pos);
+
+    void drop(glm::vec3 &pos);
 };

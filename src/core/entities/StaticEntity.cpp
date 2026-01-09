@@ -1,6 +1,4 @@
-// #define DEBUG
-
-#include "core/Mesh.h"
+#include "core/mesh/Mesh.h"
 #include "graphics/Shader.h"
 #include "spdlog/spdlog.h"
 #include "core/entities/StaticEntity.h"
@@ -37,7 +35,7 @@ void StaticEntity::draw(Shader &shader) const
 
     glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_INT, 0);
 
-#ifdef DEBUG
+#ifdef DEBUG_ENTITIES
     spdlog::info("Finished Drawing StaticEntity");
 #endif
 }

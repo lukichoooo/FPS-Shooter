@@ -1,9 +1,10 @@
 #pragma once
 
 #include <cassert>
-#include "core/MeshFactory.h"
+#include "core/mesh/MeshFactory.h"
 #include "core/entities/StaticEntity.h"
-#include "core/Scene.h"
+#include "core/scene/Scene.h"
+#include "core/scene/SceneBuilder.h"
 #include "unitTests/testsHelper/ShaderTestsHelper.h"
 
 
@@ -36,7 +37,11 @@ class SceneTests
         StaticEntity s2 = _makeStaticEntity();
         DynamicEntity e1 = _makeDynamicEntity();
 
-        Scene scene({s1, s2}, {e1});
+        Scene scene = SceneBuilder()
+                          .addStatic(s1)
+                          .addStatic(s2)
+                          .addDynamic(e1)
+                          .build();
 
         assert(scene.getStaticEntities().size() == 2);
         assert(scene.getDynamicEntities().size() == 1);
@@ -44,7 +49,7 @@ class SceneTests
 
     void test_scene_add()
     {
-        Scene scene({}, {});
+        Scene scene;
 
         StaticEntity s = _makeStaticEntity();
         DynamicEntity e = _makeDynamicEntity();
@@ -61,16 +66,16 @@ class SceneTests
 
     void test_scene_overflow()
     {
-        Scene scene({}, {});
+        Scene scene;
 
-        for (size_t i = 0; i < SceneConfig::staticEntitiesSize; ++i)
+        for (size_t i = 0; i < SceneStorageConfig::staticEntitiesSize; ++i)
         {
             scene.addStatic(_makeStaticEntity());
         }
 
         // One too many → should safely ignore or assert
         scene.addStatic(_makeStaticEntity());
-        assert(scene.getStaticEntities().size() == SceneConfig::staticEntitiesSize);
+        assert(scene.getStaticEntities().size() == SceneStorageConfig::staticEntitiesSize);
     }
 };
 
