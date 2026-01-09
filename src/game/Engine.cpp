@@ -2,7 +2,7 @@
 
 #include "game/Engine.h"
 #include "config/EngineConfig.h"
-#include "game/Scene.h"
+#include "core/Scene.h"
 #include "game/WorldBuilder.h"
 #include "graphics/Renderer.h"
 #include "core/Camera.h"

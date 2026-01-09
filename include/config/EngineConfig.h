@@ -59,6 +59,17 @@ class EntityConfigStruct
     }
 };
 
+struct FlyingTargetAnimatorConfig
+{
+    float gravity{9.81f};
+    float groundY{0.0f};
+
+    float flySpeed{6.5f};
+    float boostSpeed{10.0f};
+    float accelerationTime{0.00001f};
+    float decelerationTime{0.000005f};
+};
+
 
 struct CharacterAnimatorConfig
 {

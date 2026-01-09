@@ -13,7 +13,7 @@ int main()
     }
 
     ConfigService configService;
-    configService.saveDefaults();
+    // configService.saveDefaults();
     EngineConfig config = configService.load();
 
     Engine engine(config);

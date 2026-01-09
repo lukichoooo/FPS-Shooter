@@ -17,6 +17,6 @@ Scene WorldBuilder::buildScene([[maybe_unused]] Shader &shader)
         {
             // dynamic entities
 
-            entityBuilder.getPyramid(EntityConfigs::Big + Colors::BrightRed),
+            entityBuilder.getPyramid(EntityConfigs::Small + Colors::BrightRed),
         });
 }

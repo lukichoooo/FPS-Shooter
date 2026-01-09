@@ -19,6 +19,7 @@ add_library(GameCore STATIC
     src/core/Input.cpp
     src/core/MeshFactory.cpp
     src/core/Mesh.cpp
+    src/core/Scene.cpp
 
     src/core/entities/DynamicEntity.cpp
     src/core/entities/StaticEntity.cpp
@@ -28,9 +29,11 @@ add_library(GameCore STATIC
     src/game/Engine.cpp
     src/game/Player.cpp
     src/game/WorldBuilder.cpp
-    src/game/Scene.cpp
 
     src/game/entities/Character.cpp
+
+    src/game/animation/CharacterAnimator.cpp
+    src/game/animation/FlyingTargetAnimator.cpp
 
     # Graphics
     src/graphics/Renderer.cpp

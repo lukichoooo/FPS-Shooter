@@ -1,7 +1,7 @@
 #pragma once
 
 #include "core/entities/EntityBuilder.h"
-#include "game/Scene.h"
+#include "core/Scene.h"
 
 class WorldBuilder
 {

@@ -2,7 +2,8 @@
 
 #include <cassert>
 #include "core/MeshFactory.h"
-#include "game/Scene.h"
+#include "core/entities/StaticEntity.h"
+#include "core/Scene.h"
 #include "unitTests/testsHelper/ShaderTestsHelper.h"
 
 
@@ -48,8 +49,8 @@ class SceneTests
         StaticEntity s = _makeStaticEntity();
         DynamicEntity e = _makeDynamicEntity();
 
-        scene.addStaticEntity(s);
-        scene.addEntity(e);
+        scene.addStatic(s);
+        scene.addDynamic(e);
 
         auto statics = scene.getStaticEntities();
         auto dynamics = scene.getDynamicEntities();
@@ -64,11 +65,11 @@ class SceneTests
 
         for (size_t i = 0; i < SceneConfig::staticEntitiesSize; ++i)
         {
-            scene.addStaticEntity(_makeStaticEntity());
+            scene.addStatic(_makeStaticEntity());
         }
 
         // One too many → should safely ignore or assert
-        scene.addStaticEntity(_makeStaticEntity());
+        scene.addStatic(_makeStaticEntity());
         assert(scene.getStaticEntities().size() == SceneConfig::staticEntitiesSize);
     }
 };

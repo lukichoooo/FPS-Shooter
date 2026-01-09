@@ -2,7 +2,7 @@
 
 #include "config/EngineConfig.h"
 #include "core/entities/DynamicEntity.h"
-#include "game/entities/CharacterAnimator.h"
+#include "game/animation/CharacterAnimator.h"
 #include <glm/ext/vector_float3.hpp>
 
 class Character : public DynamicEntity
