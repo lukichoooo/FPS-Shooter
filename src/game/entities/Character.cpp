@@ -1,4 +1,4 @@
-#include <game/entities/Character.h>
+#include "game/entities/Character.h"
 
 Character::Character(const CharacterConfig &config)
     : DynamicEntity(config, nullptr),

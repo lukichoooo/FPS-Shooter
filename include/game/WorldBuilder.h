@@ -7,10 +7,9 @@
 class WorldBuilder
 {
     const WorldBuilderConfig &config;
-    EntityBuilder entityBuilder;
 
   public:
     WorldBuilder(const WorldBuilderConfig &config) : config(config) {}
 
-    Scene buildScene();
+    Scene buildScene(EntityBuilder &eb);
 };

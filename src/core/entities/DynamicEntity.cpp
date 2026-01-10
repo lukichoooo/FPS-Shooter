@@ -1,6 +1,5 @@
+#include "core/pch.hpp"
 #include "core/entities/DynamicEntity.h"
-#include "spdlog/spdlog.h"
-#include <glm/ext/matrix_transform.hpp>
 
 DynamicEntity::DynamicEntity()
     : config(),

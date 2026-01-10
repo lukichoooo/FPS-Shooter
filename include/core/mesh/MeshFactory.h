@@ -13,6 +13,7 @@ class MeshFactory
     Mesh *square;
     Mesh *pyramid;
     Mesh *cube;
+    Mesh *pistol;
 
 
   public:
@@ -23,6 +24,7 @@ class MeshFactory
     Mesh *getSquare() { return square; }
     Mesh *getPyramid() { return pyramid; }
     Mesh *getCube() { return cube; }
+    Mesh *getPistol() { return pistol; }
 
     // @brief creates new instance
     Mesh *buildNewSquare();
@@ -32,4 +34,7 @@ class MeshFactory
 
     // @brief creates new instance
     Mesh *buildNewCube();
+
+    // @brief creates new instance
+    Mesh *buildNewPistol();
 };

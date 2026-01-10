@@ -4,16 +4,14 @@
 #include "core/scene/SceneBuilder.h"
 
 
-Scene WorldBuilder::buildScene()
+Scene WorldBuilder::buildScene(EntityBuilder &eb)
 {
-    // auto flyingPyramidConfig = config.flyingTarget;
-
     return SceneBuilder()
-        .addStatic(entityBuilder.getTerrain())
+        .addStatic(eb.getTerrain())
         // .addDynamic(entityBuilder.getCube(
         //     EntityConfigs::Bigger + Colors::Crimson
         //     + EntityConfigs::PlaceRight))
-        .addPyramidTarget(entityBuilder.getPyramidTarget(config.flyingTarget + EntityConfigs::PlaceAboveLeft + Colors::Gold))
-        .addPyramidTarget(entityBuilder.getPyramidTarget(config.flyingTarget + EntityConfigs::PlaceAboveRight + Colors::Lime))
+        .addPyramidTarget(eb.getPyramidTarget(config.flyingTarget + EntityConfigs::PlaceAboveLeft + Colors::Gold))
+        .addPyramidTarget(eb.getPyramidTarget(config.flyingTarget + EntityConfigs::PlaceAboveRight + Colors::Lime))
         .build();
 }

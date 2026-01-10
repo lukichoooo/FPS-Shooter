@@ -1,6 +1,5 @@
 #define DEBUG_ENTITIES
 // #define DEBUG_CAMERA
-// #define DEBUG_ENGINE
 // #define DEBUG_MESH_FACTORY
 
 

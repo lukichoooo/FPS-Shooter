@@ -1,24 +1,25 @@
+// #define DEBUG_ENGINE
+
 #include "game/Engine.h"
 #include "config/EngineConfig.h"
+#include "core/AIManager.h"
+#include "core/entities/EntityBuilder.h"
 #include "core/scene/Scene.h"
 #include "game/WorldBuilder.h"
+#include "game/player/PlayerInventory.h"
 #include "graphics/Renderer.h"
 #include "core/Camera.h"
 #include "core/Input.h"
-#include "game/Player.h"
+#include "game/player/Player.h"
 #include "graphics/FrameClock.h"
 #include "graphics/Shader.h"
-#include <glm/ext/matrix_clip_space.hpp>
-#include <glm/ext/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/trigonometric.hpp>
-// #include "spdlog/spdlog.h"
 
 Engine::Engine(const EngineConfig &config)
     : config(config),
       window(config.window),
       renderer(config.render),
-      worldBuilder(config.worldBuilder) {}
+      worldBuilder(config.worldBuilder),
+      entityBuilder() {}
 
 
 void Engine::run()
@@ -31,8 +32,17 @@ void Engine::run()
     Camera playerCamera(
         config.camera,
         [winPtr = &window](int &w, int &h) { winPtr->getFrameBufferSize(w, h); });
-    Player player(config.player, &playerCamera);
+
+    GunConfig gun_1_config;
+    GunConfig gun_2_config;
+    GunConfig gun_3_config;
+    PlayerInventory inventory = entityBuilder.getPlayerInventory(
+        gun_1_config,
+        gun_2_config,
+        gun_3_config);
+    Player player(config.player, inventory, &playerCamera);
     Input input(config.input, window.getHandle());
+    AIManager aiManager;
 
 
     // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -40,7 +50,7 @@ void Engine::run()
     shader.use();
     input.use();
 
-    Scene scene = worldBuilder.buildScene();
+    Scene scene = worldBuilder.buildScene(entityBuilder);
 
 
     while (!window.windowShouldClose())
@@ -49,6 +59,8 @@ void Engine::run()
 
         input.handleKeyInput(player, playerCamera);
         input.handleMouseSensorInput(playerCamera);
+
+        aiManager.run(player, scene);
 
         playerCamera.updateView(player.getCameraPosition());
         playerCamera.updateProjection();

@@ -17,5 +17,6 @@ class PyramidTarget : public DynamicEntity
     void boost(glm::vec3 &movement);
     void drop();
 
+    void runAI(const glm::vec3 &playerPos);
     void draw(Shader &shader) override;
 };

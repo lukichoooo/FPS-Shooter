@@ -41,6 +41,12 @@ void PyramidTarget::drop()
     animator.drop(pos);
 }
 
+
+void PyramidTarget::runAI(const glm::vec3 &playerPos)
+{
+    animator.updateRotationDirected(rotation, pos, playerPos);
+}
+
 void PyramidTarget::draw(Shader &shader)
 {
     mesh->bind();

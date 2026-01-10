@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core/entities/EntityBuilder.h"
 #include "game/WorldBuilder.h"
 #include "graphics/Renderer.h"
 #include "config/EngineConfig.h"
@@ -12,6 +13,7 @@ class Engine
     Window window;
     Renderer renderer;
     WorldBuilder worldBuilder;
+    EntityBuilder entityBuilder;
 
   public:
     Engine(const EngineConfig &config);

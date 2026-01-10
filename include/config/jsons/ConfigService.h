@@ -179,16 +179,17 @@ inline void from_json(const json &j, CharacterConfig &c)
     j.at("color").get_to(c.color);
 }
 
+
 // PlayerConfig
 inline void to_json(json &j, const PlayerConfig &c)
 {
     j = {
-        {"characterConfig", c.characterConfig},
+        {"character", c.character},
     };
 }
 inline void from_json(const json &j, PlayerConfig &c)
 {
-    j.at("characterConfig").get_to(c.characterConfig);
+    j.at("character").get_to(c.character);
 }
 
 

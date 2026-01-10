@@ -5,6 +5,11 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Enable Ninja multi-core builds automatically
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Build type" FORCE)
+endif()
+
 # Libraries
 find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
@@ -30,14 +35,17 @@ add_library(GameCore STATIC
 
     # Game
     src/game/Engine.cpp
-    src/game/Player.cpp
     src/game/WorldBuilder.cpp
 
     src/game/entities/Character.cpp
     src/game/entities/PyramidTarget.cpp
+    src/game/entities/Gun.cpp
 
     src/game/animation/CharacterAnimator.cpp
     src/game/animation/FlyingTargetAnimator.cpp
+
+    src/game/player/Player.cpp
+    src/game/player/PlayerInventory.cpp
 
     # Graphics
     src/graphics/Renderer.cpp
@@ -94,6 +102,12 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     -Werror
     -g
     -O0
+)
+
+# Precompiled headers for GameCore
+target_precompile_headers(GameCore PRIVATE
+    <string>
+    <glm/glm.hpp>
 )
 
 add_custom_target(copy_shaders ALL

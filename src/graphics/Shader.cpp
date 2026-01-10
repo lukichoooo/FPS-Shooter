@@ -1,12 +1,8 @@
 #include "config/EngineConfig.h"
-#include "spdlog/spdlog.h"
-#include <GL/glew.h>
-#include <GL/glext.h>
+#include "graphics/Shader.h"
+#include "core/pch.hpp"
 #include <cstdlib>
 #include <fstream>
-#include <glm/ext/matrix_float4x4.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <graphics/Shader.h>
 #include <sstream>
 
 Shader::Shader(const ShaderConfig &config)

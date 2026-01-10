@@ -35,6 +35,7 @@ void Input::handleKeyInput(Player &player, const Camera &camera)
     if (glm::length(moveDir) > 0.0f)
         moveDir = glm::normalize(moveDir);
 
+    // other
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
         player.run(moveDir);
     else
@@ -42,6 +43,22 @@ void Input::handleKeyInput(Player &player, const Camera &camera)
 
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
         player.jump();
+
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+        player.selectPreviousItem();
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+        player.selectNextItem();
+
+    // mouse
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+    {
+        player.shoot();
+    }
+
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
+    {
+        // Right mouse button is pressed
+    }
 
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GLFW_TRUE);

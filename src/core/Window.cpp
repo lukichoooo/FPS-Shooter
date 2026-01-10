@@ -1,7 +1,5 @@
-#include <GL/glew.h>
+#include "core/pch.hpp"
 #include "core/Window.h"
-#include <GLFW/glfw3.h>
-#include <spdlog/spdlog.h>
 
 
 Window::Window(const WindowConfig &config)

@@ -27,6 +27,11 @@ PyramidTarget EntityBuilder::getPyramidTarget(const FlyingTargetConfig &config)
     return {config, meshFactory.buildNewPyramid()};
 }
 
+Gun EntityBuilder::getGun(const GunConfig &config)
+{
+    return {config, meshFactory.getPistol()};
+}
+
 
 // pre-configured
 
@@ -36,4 +41,17 @@ StaticEntity EntityBuilder::getTerrain()
         EntityConfigs::Ground + Colors::DarkBlue,
         meshFactory.getSquare(),
     };
+}
+
+PlayerInventory EntityBuilder::getPlayerInventory(
+    const GunConfig &config_1,
+    const GunConfig &config_2,
+    const GunConfig &config_3)
+{
+    return {
+        {
+            getGun(config_1),
+            getGun(config_2),
+            getGun(config_3),
+        }};
 }

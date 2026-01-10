@@ -1,9 +1,11 @@
 #pragma once
 
+#include "config/EngineConfig.h"
 #include "core/mesh/MeshFactory.h"
 #include "core/entities/DynamicEntity.h"
 #include "core/entities/StaticEntity.h"
 #include "game/entities/PyramidTarget.h"
+#include "game/player/PlayerInventory.h"
 
 class EntityBuilder
 {
@@ -18,6 +20,12 @@ class EntityBuilder
 
     // objects
     PyramidTarget getPyramidTarget(const FlyingTargetConfig &config);
+    Gun getGun(const GunConfig &config);
+    PlayerInventory getPlayerInventory(
+        const GunConfig &config_1,
+        const GunConfig &config_2,
+        const GunConfig &config_3);
+
     // getPistol();
     // getHouse();
 

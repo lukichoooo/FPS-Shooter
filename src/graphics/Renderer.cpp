@@ -1,8 +1,6 @@
 #include "graphics/Renderer.h"
 #include "config/EngineConfig.h"
 #include "game/entities/PyramidTarget.h"
-#include <GLFW/glfw3.h>
-#include <glm/gtc/type_ptr.hpp>
 
 
 Renderer::Renderer(const RenderConfig &config)

@@ -15,6 +15,11 @@ struct MeshFactoryStorageConfig
     static constexpr size_t meshesSize = 16;
 };
 
+struct PlayerInventoryConfig
+{
+    static const int slots{3};
+};
+
 struct SceneStorageConfig
 {
     static constexpr size_t staticEntitiesSize = 16;
@@ -51,6 +56,16 @@ struct EntityConfigStruct
             this->color != Colors::Default ? this->color : color,
         };
     }
+
+    constexpr EntityConfigStruct operator*(int multiplier) const
+    {
+        return {
+            pos * float(multiplier),
+            rotation * float(multiplier),
+            scale * float(multiplier),
+            color,
+        };
+    }
 };
 
 struct FlyingTargetAnimatorConfig
@@ -63,9 +78,11 @@ struct FlyingTargetAnimatorConfig
     float accelerationTime{0.00001f};
     float decelerationTime{0.000005f};
 
-    // map placement
-    float orbitRadius{1.0f};
-    float orbitSpeed = 3.0f;
+    float orbitRadius{0.5f};
+    float orbitSpeed{5.0f};
+
+    float rotationSpeed{6.0f};
+    // glm::vec3 up{0.0f, 1.0f, 0.0f};
 };
 
 
@@ -91,10 +108,14 @@ struct CharacterConfig : public EntityConfigStruct
     float height{1.8f};
 };
 
+struct GunConfig : public EntityConfigStruct
+{
+    int magazineSize{3};
+};
 
 struct PlayerConfig
 {
-    CharacterConfig characterConfig;
+    CharacterConfig character;
 };
 
 struct FlyingTargetConfig : public EntityConfigStruct

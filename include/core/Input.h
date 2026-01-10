@@ -3,7 +3,7 @@
 #include "config/EngineConfig.h"
 #include "core/Camera.h"
 #include "core/Dtos.h"
-#include "game/Player.h"
+#include "game/player/Player.h"
 #include <GLFW/glfw3.h>
 
 class Input
