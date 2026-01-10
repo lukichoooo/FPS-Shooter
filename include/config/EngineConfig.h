@@ -64,8 +64,7 @@ struct FlyingTargetAnimatorConfig
     float decelerationTime{0.000005f};
 
     // map placement
-    float orbitRadius{5.0f};
-    glm::vec3 orbitCenter{10.0f, 4.0f, 0.0f};
+    float orbitRadius{1.0f};
     float orbitSpeed = 3.0f;
 };
 
@@ -102,16 +101,33 @@ struct FlyingTargetConfig : public EntityConfigStruct
 {
     FlyingTargetAnimatorConfig animatorConfig;
 
-    FlyingTargetConfig operator=(const EntityConfigStruct &o) const
+    FlyingTargetConfig() = default;
+    FlyingTargetConfig(const EntityConfigStruct &base, FlyingTargetAnimatorConfig anim)
+        : EntityConfigStruct(base), animatorConfig(anim) {}
+
+    FlyingTargetConfig operator+(const EntityConfigStruct &o) const
     {
-        return FlyingTargetConfig(o, this->animatorConfig);
+        FlyingTargetConfig result(*this);
+        result.pos += o.pos;
+        result.rotation += o.rotation;
+        result.scale *= o.scale;
+        if (result.color == Colors::Default)
+            result.color = o.color;
+        return result;
     }
 
-    FlyingTargetConfig operator+(const glm::vec4 &newColor) const
+    // + operator with color
+    FlyingTargetConfig operator+(const glm::vec4 &color) const
     {
-        return FlyingTargetConfig(
-            EntityConfigStruct::operator+(newColor),
-            this->animatorConfig);
+        FlyingTargetConfig result(*this);
+        if (result.color == Colors::Default)
+            result.color = color;
+        return result;
+    }
+
+    void operator=(const EntityConfigStruct &o)
+    {
+        this->EntityConfigStruct::operator=(o);
     }
 };
 

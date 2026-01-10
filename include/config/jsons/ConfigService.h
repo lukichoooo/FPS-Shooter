@@ -223,7 +223,6 @@ inline void to_json(nlohmann::json &j, const FlyingTargetAnimatorConfig &c)
         {"accelerationTime", c.accelerationTime},
         {"decelerationTime", c.decelerationTime},
         {"orbitRadius", c.orbitRadius},
-        {"orbitCenter", c.orbitCenter},
         {"orbitSpeed", c.orbitSpeed},
     };
 }
@@ -237,7 +236,6 @@ inline void from_json(const nlohmann::json &j, FlyingTargetAnimatorConfig &c)
     j.at("accelerationTime").get_to(c.accelerationTime);
     j.at("decelerationTime").get_to(c.decelerationTime);
     j.at("orbitRadius").get_to(c.orbitRadius);
-    j.at("orbitCenter").get_to(c.orbitCenter);
     j.at("orbitSpeed").get_to(c.orbitSpeed);
 }
 

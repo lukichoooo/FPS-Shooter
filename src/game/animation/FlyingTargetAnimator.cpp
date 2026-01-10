@@ -7,8 +7,8 @@ void FlyingTargetAnimator::updatePos(glm::vec3 &pos)
     float dt = FrameClock::getDeltaTime();
 
     orbitAngle += config.orbitSpeed * dt;
-    pos.x = config.orbitCenter.x + std::cos(orbitAngle) * config.orbitRadius;
-    pos.z = config.orbitCenter.z + std::sin(orbitAngle) * config.orbitRadius;
+    pos.x += std::cos(orbitAngle) * config.orbitRadius;
+    pos.z += std::sin(orbitAngle) * config.orbitRadius;
 
     considerIfDropping(pos);
 }

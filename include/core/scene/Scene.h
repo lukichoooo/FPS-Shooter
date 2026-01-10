@@ -12,7 +12,7 @@ class Scene
   private:
     std::array<StaticEntity, SceneStorageConfig::staticEntitiesSize> statics{};
     std::array<DynamicEntity, SceneStorageConfig::dynamicEntitiesSize> dynamics{};
-    std::array<PyramidTarget, SceneStorageConfig::pyramidTargetsSize> pyramidTargets;
+    std::array<PyramidTarget, SceneStorageConfig::pyramidTargetsSize> pyramidTargets{};
     size_t index_statics{};
     size_t index_dynamics{};
     size_t index_pyramidTargets{};

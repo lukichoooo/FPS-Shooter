@@ -24,7 +24,7 @@ DynamicEntity EntityBuilder::getSquare(const EntityConfigStruct &config)
 
 PyramidTarget EntityBuilder::getPyramidTarget(const FlyingTargetConfig &config)
 {
-    return {config, meshFactory.getPyramid()};
+    return {config, meshFactory.buildNewPyramid()};
 }
 
 
