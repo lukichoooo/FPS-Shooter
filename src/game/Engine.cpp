@@ -37,15 +37,16 @@ void Engine::run()
     GunConfig gun_2_config;
     GunConfig gun_3_config;
     PlayerInventory inventory = entityBuilder.getPlayerInventory(
-        gun_1_config,
-        gun_2_config,
-        gun_3_config);
+        gun_1_config + Colors::Red,
+        gun_2_config + Colors::Green,
+        gun_3_config + Colors::Gold);
     Player player(config.player, inventory, &playerCamera);
-    Input input(config.input, window.getHandle());
-    AIManager aiManager;
 
 
     // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    Input input(config.input, window.getHandle());
+    AIManager aiManager;
 
     shader.use();
     input.use();
@@ -57,13 +58,13 @@ void Engine::run()
     {
         FrameClock::updateDeltaTime();
 
-        input.handleKeyInput(player, playerCamera);
-        input.handleMouseSensorInput(playerCamera);
+        input.handleInput(player, playerCamera);
 
         aiManager.run(player, scene);
 
         playerCamera.updateView(player.getCameraPosition());
         playerCamera.updateProjection();
+        player.setRotation(playerCamera.getYawRotation());
 
         shader.setMat4f("view", playerCamera.getView());
         shader.setMat4f("projection", playerCamera.getProjection());
@@ -72,6 +73,7 @@ void Engine::run()
         spdlog::info("begining frame rendering");
 #endif
         renderer.beginFrame();
+        renderer.submit(player, shader);
         renderer.submit(scene, shader);
 
         window.swapBuffers();

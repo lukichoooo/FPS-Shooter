@@ -8,14 +8,12 @@ class Gun : public DynamicEntity
   private:
     GunConfig config;
 
-    int bullets;
-
+    int bullets{};
 
   public:
     Gun() = default;
     Gun(const GunConfig &config, Mesh *mesh);
 
-    // TODO
     void shoot();
     void reload();
 };

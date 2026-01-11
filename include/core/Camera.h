@@ -7,7 +7,7 @@
 class Camera //  TODO: add CameraAnimator
 {
   private:
-    const CameraConfig &config;
+    CameraConfig config;
 
     float FOV;
     glm::vec3 front;
@@ -31,6 +31,7 @@ class Camera //  TODO: add CameraAnimator
     const glm::vec3 &getUp() const { return up; }
     const glm::mat4 &getView() const { return view; }
     const glm::mat4 &getProjection() const { return projection; }
+    const glm::vec3 getYawRotation() const;
 
     void setFov(float value) { FOV = value; }
     void setYaw(float value) { yaw = value; }

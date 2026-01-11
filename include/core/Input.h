@@ -15,20 +15,25 @@ class Input
     MousePos lastMouse{0, 0};
     MousePos mouseChange{0, 0};
 
-    bool keyPressed[GLFW_KEY_LAST + 1]{};
+    // bool keyPressed[GLFW_KEY_LAST + 1]{};
 
 
     static void mouseCallbackStatic(GLFWwindow *window, double x, double y);
     void processMouseSensorInput(double x, double y);
 
+    void handleMouseSensorInput(Camera &camera);
+    void handleKeyInput(Player &player, const Camera &camera);
+    void handleDirectionalMovement(Player &player, const Camera &camera);
+    void handleItemKeys(Player &player);
+    void handleMouseKeys(Player &player);
+    void handleExitKeys();
+
   public:
     Input(const InputConfig &config, GLFWwindow *window);
 
-    // @brief changes player position
-    void handleKeyInput(Player &player, const Camera &camera);
+    // @brief changes player position & camera orientation
+    void handleInput(Player &player, Camera &camera);
 
-    // @brief changes camera orientation
-    void handleMouseSensorInput(Camera &camera);
 
     void use();
 };

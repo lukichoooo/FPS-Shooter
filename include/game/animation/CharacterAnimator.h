@@ -19,7 +19,6 @@ class CharacterAnimator
   public:
     CharacterAnimator(const CharacterAnimatorConfig &config) : config(config) {}
 
-
     void updatePosRun(glm::vec3 &pos, const glm::vec3 &inputDir);
     void updatePosWalk(glm::vec3 &pos, const glm::vec3 &inputDir);
     void jump(const glm::vec3 &pos);

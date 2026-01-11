@@ -1,9 +1,12 @@
 #include "game/entities/Character.h"
+#include "game/player/PlayerInventory.h"
+#include <glm/ext/matrix_transform.hpp>
 
-Character::Character(const CharacterConfig &config)
+Character::Character(const CharacterConfig &config, const PlayerInventory &inventory)
     : DynamicEntity(config, nullptr),
       config(config),
       animator(config.animatorConfig),
+      inventory(inventory),
       height(config.height) {}
 
 
@@ -20,4 +23,28 @@ void Character::walk(glm::vec3 &movement)
 void Character::jump()
 {
     animator.jump(pos);
+}
+
+void Character::selectNextItem() { inventory.selectNext(); }
+
+void Character::selectPreviousItem() { inventory.selectPrevious(); }
+
+void Character::shoot() { inventory.getCurrentItem()->shoot(); }
+void Character::reload() { inventory.getCurrentItem()->reload(); }
+
+void Character::draw(Shader &shader)
+{
+    Gun *item = inventory.getCurrentItem();
+
+    float yaw = rotation.y;
+    glm::vec3 handOffsetLocal(1.3f, -0.2f, 0.8f); // move to config
+
+    glm::mat4 itemRot = glm::rotate(glm::mat4(1), yaw, glm::vec3(0, 1, 0));
+    glm::vec3 handOffsetGlobal = glm::vec3(itemRot * glm::vec4(handOffsetLocal, 0));
+
+    item->setPos(getPos() + handOffsetGlobal);
+    item->setRotation(rotation);
+    item->draw(shader);
+
+    // DynamicEntity::draw(shader);
 }

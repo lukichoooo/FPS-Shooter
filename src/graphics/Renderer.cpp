@@ -1,5 +1,6 @@
 #include "graphics/Renderer.h"
 #include "config/EngineConfig.h"
+#include "game/player/Player.h"
 #include "game/entities/PyramidTarget.h"
 
 
@@ -19,6 +20,11 @@ void Renderer::beginFrame() const
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
+
+void Renderer::submit(Player &player, Shader &shader)
+{
+    player.getCharacter()->draw(shader);
+};
 
 void Renderer::submit(Scene &scene, Shader &shader)
 {

@@ -2,6 +2,8 @@
 
 
 #include "core/pch.hpp"
+#include <glm/gtc/quaternion.hpp>
+#include <glm/trigonometric.hpp>
 #include "core/Camera.h"
 
 
@@ -46,4 +48,10 @@ void Camera::updateProjection()
         (float)frameBufferWidth / (float)frameBufferHeight,
         config.nearPlane,
         config.farPlane);
+}
+
+
+const glm::vec3 Camera::getYawRotation() const
+{
+    return glm::vec3(0, -glm::radians(yaw), 0);
 }

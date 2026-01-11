@@ -8,7 +8,20 @@ Gun::Gun(const GunConfig &config, Mesh *mesh)
     : DynamicEntity(config, mesh),
       config(config) {}
 
+
 void Gun::shoot()
 {
-    spdlog::info("EVERYONE GET DOWN, HE HAS A GUN");
+    if (bullets == 0)
+    {
+        spdlog::info("mag empty, must reload!");
+        this->reload();
+    }
+    spdlog::info("pew...");
+    bullets--;
+}
+
+void Gun::reload()
+{
+    spdlog::info("gun reloading");
+    bullets = config.magazineSize;
 }

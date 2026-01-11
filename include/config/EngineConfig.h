@@ -111,6 +111,30 @@ struct CharacterConfig : public EntityConfigStruct
 struct GunConfig : public EntityConfigStruct
 {
     int magazineSize{3};
+
+
+    GunConfig operator+(const EntityConfigStruct &o)
+    {
+        this->pos += o.pos;
+        this->rotation += o.rotation;
+        this->scale *= o.scale;
+        if (this->color == Colors::Default)
+            this->color = o.color;
+        return *this;
+    }
+
+    // + operator with color
+    GunConfig operator+(const glm::vec4 &color)
+    {
+        if (this->color == Colors::Default)
+            this->color = color;
+        return *this;
+    }
+
+    void operator=(const EntityConfigStruct &o)
+    {
+        this->EntityConfigStruct::operator=(o);
+    }
 };
 
 struct PlayerConfig
