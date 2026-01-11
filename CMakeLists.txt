@@ -45,7 +45,7 @@ add_library(GameCore STATIC
     src/game/animation/FlyingTargetAnimator.cpp
 
     src/game/player/Player.cpp
-    src/game/player/PlayerInventory.cpp
+    src/game/player/Inventory.cpp
 
     # Graphics
     src/graphics/Renderer.cpp

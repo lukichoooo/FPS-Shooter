@@ -15,7 +15,7 @@ class Player
     Camera *camera;
 
   public:
-    Player(const PlayerConfig &config, PlayerInventory &inventory, Camera *camera);
+    Player(const PlayerConfig &config, Inventory &inventory, Camera *camera);
 
     Character *getCharacter() { return &character; }
 

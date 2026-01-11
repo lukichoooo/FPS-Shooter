@@ -6,7 +6,7 @@
 #include "core/entities/EntityBuilder.h"
 #include "core/scene/Scene.h"
 #include "game/WorldBuilder.h"
-#include "game/player/PlayerInventory.h"
+#include "game/player/Inventory.h"
 #include "graphics/Renderer.h"
 #include "core/Camera.h"
 #include "core/Input.h"
@@ -36,7 +36,7 @@ void Engine::run()
     GunConfig gun_1_config;
     GunConfig gun_2_config;
     GunConfig gun_3_config;
-    PlayerInventory inventory = entityBuilder.getPlayerInventory(
+    Inventory inventory = entityBuilder.getPlayerInventory(
         gun_1_config + Colors::Red,
         gun_2_config + Colors::Green,
         gun_3_config + Colors::Gold);

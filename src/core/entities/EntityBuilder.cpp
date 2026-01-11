@@ -43,7 +43,7 @@ StaticEntity EntityBuilder::getTerrain()
     };
 }
 
-PlayerInventory EntityBuilder::getPlayerInventory(
+Inventory EntityBuilder::getPlayerInventory(
     const GunConfig &config_1,
     const GunConfig &config_2,
     const GunConfig &config_3)

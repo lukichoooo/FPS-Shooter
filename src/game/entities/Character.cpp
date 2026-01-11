@@ -1,8 +1,8 @@
 #include "game/entities/Character.h"
-#include "game/player/PlayerInventory.h"
+#include "game/player/Inventory.h"
 #include <glm/ext/matrix_transform.hpp>
 
-Character::Character(const CharacterConfig &config, const PlayerInventory &inventory)
+Character::Character(const CharacterConfig &config, const Inventory &inventory)
     : DynamicEntity(config, nullptr),
       config(config),
       animator(config.animatorConfig),

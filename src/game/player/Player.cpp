@@ -2,7 +2,7 @@
 #include "game/player/Player.h"
 #include "config/EngineConfig.h"
 
-Player::Player(const PlayerConfig &config, PlayerInventory &inventory, Camera *camera)
+Player::Player(const PlayerConfig &config, Inventory &inventory, Camera *camera)
     : config(config),
       character(config.character, inventory),
       camera(camera) {}
