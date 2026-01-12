@@ -30,7 +30,6 @@ class FlyingTargetAnimator
     void updatePosDirectedFly(glm::vec3 &pos, const glm::vec3 &inputDir);
 
     void updatePos(glm::vec3 &pos);
-    void updateRotationDirected(glm::vec3 &rotation, const glm::vec3 &pos, const glm::vec3 &targetPos);
 
     void drop(glm::vec3 &pos);
 };

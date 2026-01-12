@@ -37,10 +37,9 @@ void Character::draw(Shader &shader)
     Gun *item = inventory.getCurrentItem();
 
     float yaw = rotation.y;
-    glm::vec3 handOffsetLocal(1.3f, -0.2f, 0.8f); // move to config
 
     glm::mat4 itemRot = glm::rotate(glm::mat4(1), yaw, glm::vec3(0, 1, 0));
-    glm::vec3 handOffsetGlobal = glm::vec3(itemRot * glm::vec4(handOffsetLocal, 0));
+    glm::vec3 handOffsetGlobal = glm::vec3(itemRot * glm::vec4(config.handOffsetLocal, 0));
 
     item->setPos(getPos() + handOffsetGlobal);
     item->setRotation(rotation);

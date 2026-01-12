@@ -106,6 +106,7 @@ struct CharacterConfig : public EntityConfigStruct
 {
     CharacterAnimatorConfig animatorConfig;
     float height{1.8f};
+    glm::vec3 handOffsetLocal{1.3f, -0.2f, 0.8f};
 };
 
 struct GunConfig : public EntityConfigStruct

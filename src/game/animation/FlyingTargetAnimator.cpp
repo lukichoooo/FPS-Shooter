@@ -43,29 +43,6 @@ void FlyingTargetAnimator::drop(glm::vec3 &pos)
 }
 
 
-// TODO fix
-void FlyingTargetAnimator::updateRotationDirected(
-    glm::vec3 &rotation,
-    const glm::vec3 &pos,
-    const glm::vec3 &targetPos)
-{
-    glm::vec3 delta = targetPos - pos;
-    if (glm::length(delta) < 0.0001f)
-        return;
-
-    glm::vec3 desired;
-    desired.y = std::atan2(delta.x, delta.z);
-    desired.x = std::atan2(delta.y, glm::length(glm::vec2(delta.x, delta.z)));
-    desired.z = 0.0f;
-
-    float step = config.rotationSpeed * FrameClock::getDeltaTime();
-
-    rotation.x = glm::mix(rotation.x, desired.x, step);
-    rotation.y = glm::mix(rotation.y, desired.y, step);
-    rotation.z = 0.0f;
-}
-
-
 // private helper methods
 
 
