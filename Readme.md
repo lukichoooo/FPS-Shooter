@@ -3,6 +3,8 @@
 A simple 3D FPS-style game built with modern OpenGL using C++, GLFW, and GLEW.
 The project is built with CMake and Ninja.
 
+![Gameplay Demo](demo-gifs/demo.gif)
+
 # Tech Stack
 
 - C++
