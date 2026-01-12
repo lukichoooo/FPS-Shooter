@@ -46,7 +46,7 @@ void Engine::run()
     // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     Input input(config.input, window.getHandle());
-    AIManager aiManager;
+    // AIManager aiManager;
 
     shader.use();
     input.use();
@@ -60,7 +60,7 @@ void Engine::run()
 
         input.handleInput(player, playerCamera);
 
-        aiManager.run(player, scene);
+        // aiManager.run(player, scene);
 
         playerCamera.updateView(player.getCameraPosition());
         playerCamera.updateProjection();

@@ -42,10 +42,10 @@ void PyramidTarget::drop()
 }
 
 
-void PyramidTarget::runAI(const glm::vec3 &playerPos)
-{
-    animator.updateRotationDirected(rotation, pos, playerPos);
-}
+// void PyramidTarget::runAI(const glm::vec3 &playerPos)
+// {
+//     animator.updateRotationDirected(rotation, pos, playerPos);
+// }
 
 void PyramidTarget::draw(Shader &shader)
 {
